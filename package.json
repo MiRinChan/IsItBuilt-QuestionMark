@@ -1,0 +1,9 @@
+{
+  "name": "isitbuilt",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "scan": "bun src/scanner.ts",
+    "test": "bun test tests/"
+  }
+}

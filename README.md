@@ -49,7 +49,7 @@ Hydra's own pages are linked from every row for direct inspection
 
 ```text
 config.json            targets, history limit, HTTP settings
-src/scanner.py         stdlib-only scanner (urllib, re, json)
+src/scanner.ts         scanner written in TypeScript, runs on Bun (no dependencies)
 site/                  static site: index.html, app.js, style.css, data.json
 tests/                 scanner unit tests (fixture HTML) and frontend tests
 .github/workflows/     CI (nix flake check) and the Pages update workflow
@@ -58,11 +58,17 @@ tests/                 scanner unit tests (fixture HTML) and frontend tests
 ## Running the scanner
 
 ```bash
-nix develop --command python3 src/scanner.py --config config.json --data site/data.json
+bun src/scanner.ts --config config.json --data site/data.json
 ```
 
-The scanner uses only the Python standard library; the flake's dev shell just
-provides Python, Node, and actionlint.
+or through the flake:
+
+```bash
+nix run . -- --config config.json --data site/data.json
+```
+
+The scanner uses only Bun's built-in APIs (fetch, Bun.file) and the standard
+library; there are no npm dependencies. Tests run with `bun test tests/`.
 
 ## Data format
 

@@ -26,12 +26,14 @@ jobs:
         with:
           fetch-depth: 1
 
+      - uses: oven-sh/setup-bun@v2
+
       - name: Scan Hydra build progress
-        run: python3 src/scanner.py --config config.json --data site/data.json
+        run: bun src/scanner.ts --config config.json --data site/data.json
 
       - name: Validate publish artifact
         run: >-
-          python3 -m json.tool site/data.json >/dev/null &&
+          bun -e 'await Bun.file("site/data.json").json()' &&
           test -s site/index.html &&
           test -s site/app.js &&
           test -s site/style.css

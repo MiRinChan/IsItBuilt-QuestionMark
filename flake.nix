@@ -21,9 +21,9 @@
         {
           default = pkgs.writeShellApplication {
             name = "isitbuilt-scanner";
-            runtimeInputs = [ pkgs.python3 ];
+            runtimeInputs = [ pkgs.bun ];
             text = ''
-              exec python3 ${self}/src/scanner.py --config ${self}/config.json "$@"
+              exec bun ${self}/src/scanner.ts --config ${self}/config.json "$@"
             '';
           };
         }
@@ -38,8 +38,7 @@
           default = pkgs.mkShell {
             packages = [
               pkgs.actionlint
-              pkgs.nodejs
-              pkgs.python3
+              pkgs.bun
             ];
           };
         }
@@ -56,16 +55,14 @@
               {
                 nativeBuildInputs = [
                   pkgs.actionlint
-                  pkgs.nodejs
-                  pkgs.python3
+                  pkgs.bun
                 ];
               }
               ''
                 cp -R ${self} source
                 chmod -R u+w source
                 cd source
-                python3 -m unittest discover -s tests -v
-                node --test tests/frontend.test.mjs
+                bun test tests/
                 actionlint .github/workflows/ci.yml .github/workflows/update.yml
                 touch "$out"
               '';
