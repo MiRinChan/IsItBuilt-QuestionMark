@@ -198,7 +198,7 @@ function renderHelpDialog(): string {
     compile the packages Hydra has not finished yet.
   </p>
   <p>Pin a fully built commit in <code>flake.lock</code> before upgrading:</p>
-  <pre><code>${escapeHtml(lockCommand)}</code></pre>
+  <pre><code style="user-select: all;" >${escapeHtml(lockCommand)}</code></pre>
   <p>
     Inspect any evaluation directly at <code>hydra.nixos.org/eval/&lt;id&gt;</code>. The
     channel switch in the title and this help dialog are both pure CSS — no
