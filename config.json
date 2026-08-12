@@ -18,14 +18,6 @@
       "branch": "nixos-unstable"
     },
     {
-      "id": "nixos-unstable-small",
-      "label": "nixos-unstable-small",
-      "jobset": "nixos/unstable-small",
-      "repository": "NixOS/nixpkgs",
-      "repositoryUrl": "https://github.com/NixOS/nixpkgs",
-      "branch": "nixos-unstable-small"
-    },
-    {
       "id": "nixpkgs-unstable",
       "label": "nixpkgs-unstable",
       "jobset": "nixpkgs/unstable",

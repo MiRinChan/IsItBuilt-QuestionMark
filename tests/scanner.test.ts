@@ -170,8 +170,9 @@ describe("storage", () => {
 describe("config", () => {
   test("loads a valid config synchronously", () => {
     const config = loadConfig("config.json");
-    expect(config.targets).toHaveLength(3);
-    expect(config.targets[1].jobset).toBe("nixos/unstable-small");
+    expect(config.targets).toHaveLength(2);
+    expect(config.targets[0].jobset).toBe("nixos/unstable");
+    expect(config.targets[1].jobset).toBe("nixpkgs/unstable");
   });
 
   test("rejects a config without targets", async () => {

@@ -116,32 +116,23 @@ describe("page rendering", () => {
     expect(pages[0].html).not.toMatch(/<script/i);
   });
 
-  test("each target has a radio input, a label and a pane", () => {
+  test("title is a checkbox toggle between the two targets", () => {
     const html = renderPage(data);
-    for (const id of ["nixos-unstable", "nixpkgs-unstable"]) {
-      expect(html).toContain(`id="target-${id}"`);
-      expect(html).toContain(`for="target-${id}"`);
-      expect(html).toContain(`id="pane-${id}"`);
-    }
+    expect(html).toContain('id="target-toggle" class="target-toggle"');
+    expect(html).toContain('label for="target-toggle" class="target-switch"');
+    expect(html).toContain('<code class="t-label t-0">nixos-unstable</code>');
+    expect(html).toContain('<code class="t-label t-1">nixpkgs-unstable</code>');
+    expect(html).toContain(".target-toggle:not(:checked) ~ main #pane-0 { display: block; }");
+    expect(html).toContain(".target-toggle:checked ~ main #pane-1 { display: block; }");
+    expect(html).toContain(".target-toggle:checked ~ main .t-0 { display: none; }");
+    expect(html).toContain(".target-toggle:not(:checked) ~ main .t-1 { display: none; }");
   });
 
-  test("first target is checked by default and panes toggle via CSS", () => {
+  test("each target renders a pane and there is no separate nav", () => {
     const html = renderPage(data);
-    expect(html).toContain('id="target-nixos-unstable" name="target" class="target-input" checked');
-    expect(html).not.toContain('id="target-nixpkgs-unstable" name="target" class="target-input" checked');
-    expect(html).toContain("#target-nixos-unstable:checked ~ #pane-nixos-unstable { display: block; }");
-    expect(html).toContain("#target-nixpkgs-unstable:checked ~ #pane-nixpkgs-unstable { display: block; }");
-    expect(html).toContain('#target-nixos-unstable:checked ~ .targets label[for="target-nixos-unstable"]');
-  });
-
-  test("radio inputs are siblings of the panes, before the nav", () => {
-    const html = renderPage(data);
-    const inputPos = html.indexOf('<input type="radio"');
-    const navPos = html.indexOf('<nav class="targets"');
-    const panePos = html.indexOf('id="pane-nixos-unstable"');
-    expect(inputPos).toBeGreaterThan(-1);
-    expect(inputPos).toBeLessThan(navPos);
-    expect(navPos).toBeLessThan(panePos);
+    expect(html).toContain('id="pane-0" class="target-pane"');
+    expect(html).toContain('id="pane-1" class="target-pane"');
+    expect(html).not.toContain("<nav");
   });
 
   test("all targets' rows and metrics are present", () => {
@@ -161,7 +152,7 @@ describe("page rendering", () => {
     expect(html).toContain('id="help-toggle"');
     expect(html).toContain("<dialog class=\"help-dialog\"");
     expect(html).toContain("nix flake lock --override-input nixpkgs \\");
-    expect(html).toContain("checkbox-controlled");
+    expect(html).toContain("pure CSS");
     expect(html).toContain("label for=\"help-toggle\" class=\"help-backdrop\"");
     expect(html).toContain("label for=\"help-toggle\" class=\"help-open\"");
     expect(html).not.toContain("<script");

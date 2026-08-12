@@ -20,14 +20,7 @@ body {
   background: var(--paper);
 }
 
-.targets {
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 34px;
-  border-bottom: 2px solid var(--ink);
-}
-
-.target-input {
+.target-toggle {
   position: absolute;
   width: 1px;
   height: 1px;
@@ -36,21 +29,6 @@ body {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
-}
-
-.targets label {
-  display: inline-block;
-  border: 0;
-  border-left: 1px solid var(--line);
-  padding: 8px 10px;
-  font: inherit;
-  cursor: pointer;
-  user-select: none;
-}
-
-.targets label:hover {
-  color: var(--paper);
-  background: var(--ink);
 }
 
 .target-pane {

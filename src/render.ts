@@ -128,31 +128,24 @@ function renderRows(target: TargetData): string {
   return target.rows.map((row) => renderRow(row, target)).join("");
 }
 
-function renderSwitchInputs(targets: Record<string, TargetData>): string {
+function renderHero(targets: Record<string, TargetData>): string {
   const ids = Object.keys(targets);
-  return ids
-    .map((id, index) => {
-      const checked = index === 0 ? " checked" : "";
-      return `<input type="radio" id="target-${escapeHtml(id)}" name="target" class="target-input"${checked} />`;
-    })
+  const labels = ids
+    .map((id, index) => `<code class="t-label t-${index}">${escapeHtml(targets[id].meta.label)}</code>`)
     .join("");
-}
-
-function renderNav(targets: Record<string, TargetData>): string {
-  const labels = Object.keys(targets)
-    .map((id) => `<label for="target-${escapeHtml(id)}">${escapeHtml(targets[id].meta.label)}</label>`)
-    .join("");
-  return `<nav class="targets" aria-label="Channel">${labels}</nav>`;
+  return `<header class="hero">
+    <h1>Is<br /><label for="target-toggle" class="target-switch">${labels}</label><br />built on Hydra yet?</h1>
+  </header>`;
 }
 
 function renderPanes(targets: Record<string, TargetData>): string {
-  return Object.values(targets)
-    .map((target) => {
-      const id = target.meta.id;
-      return `<section id="pane-${escapeHtml(id)}" class="target-pane">
+  return Object.keys(targets)
+    .map((id, index) => {
+      const target = targets[id];
+      return `<section id="pane-${index}" class="target-pane">
   <p class="updated">Last updated: ${escapeHtml(formatUpdated(target.generatedAt))}</p>
-  <section class="results" aria-labelledby="results-title-${escapeHtml(id)}">
-    <h2 id="results-title-${escapeHtml(id)}" class="visually-hidden">Hydra build progress for ${escapeHtml(target.meta.label)}</h2>
+  <section class="results" aria-labelledby="results-title-${escapeHtml(target.meta.id)}">
+    <h2 id="results-title-${escapeHtml(target.meta.id)}" class="visually-hidden">Hydra build progress for ${escapeHtml(target.meta.label)}</h2>
     <div class="table-head" aria-hidden="true">
       <span>commit</span>
       <span>build progress</span>
@@ -167,14 +160,18 @@ function renderPanes(targets: Record<string, TargetData>): string {
 }
 
 function renderSwitchCss(targets: Record<string, TargetData>): string {
-  const rules: string[] = [];
-  for (const id of Object.keys(targets)) {
-    rules.push(`#target-${id}:checked ~ #pane-${id} { display: block; }`);
-    rules.push(
-      `#target-${id}:checked ~ .targets label[for="target-${id}"], ` +
-        `#target-${id}:focus-visible ~ .targets label[for="target-${id}"] { ` +
-        `color: var(--paper); background: var(--ink); }`,
-    );
+  const ids = Object.keys(targets);
+  const rules: string[] = [
+    ".target-toggle:focus-visible ~ main .target-switch { outline: 0.04em solid var(--ink); outline-offset: 0.1em; }",
+  ];
+  for (let i = 0; i < ids.length; i++) {
+    if (i === 0) {
+      rules.push(`.target-toggle:not(:checked) ~ main #pane-0 { display: block; }`);
+      rules.push(`.target-toggle:not(:checked) ~ main .t-${ids.length - 1} { display: none; }`);
+    } else {
+      rules.push(`.target-toggle:checked ~ main #pane-${i} { display: block; }`);
+      rules.push(`.target-toggle:checked ~ main .t-0 { display: none; }`);
+    }
   }
   return `<style>\n${rules.join("\n")}\n</style>`;
 }
@@ -208,8 +205,8 @@ function renderHelpDialog(): string {
   <pre><code>${escapeHtml(lockCommand)}</code></pre>
   <p>
     Inspect any evaluation directly at <code>hydra.nixos.org/eval/&lt;id&gt;</code>. The
-    channel switch and this help dialog are both pure CSS (a radio toggle and a
-    checkbox-controlled <code>&lt;dialog&gt;</code>) — no JavaScript anywhere on this page.
+    channel switch in the title and this help dialog are both pure CSS — no
+    JavaScript anywhere on this page.
   </p>
 </dialog>`;
 }
@@ -231,13 +228,10 @@ export function renderPage(data: DataFile): string {
     ${renderSwitchCss(targets)}
   </head>
   <body>
+    <input type="checkbox" id="target-toggle" class="target-toggle" />
     ${renderHelpToggle()}
     <main>
-      <header class="hero">
-        <h1>Is it<br />built on Hydra<br />yet?</h1>
-      </header>
-      ${renderSwitchInputs(targets)}
-      ${renderNav(targets)}
+      ${renderHero(targets)}
       ${renderPanes(targets)}
     </main>
     ${renderHelpDialog()}
