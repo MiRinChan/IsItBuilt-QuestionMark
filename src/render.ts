@@ -223,7 +223,7 @@ export function renderPage(data: DataFile): string {
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="${escapeHtml(description)}" />
-    <title>Is ${defaultLabel} built on Hydra yet?</title>
+    <title>Is it built on Hydra yet?</title>
     <link rel="stylesheet" href="./style.css" />
     ${renderSwitchCss(targets)}
   </head>
