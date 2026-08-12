@@ -139,7 +139,6 @@ function renderPanes(targets: Record<string, TargetData>): string {
     .map((id, index) => {
       const target = targets[id];
       return `<section id="pane-${index}" class="target-pane">
-  <p class="updated">Last updated: ${escapeHtml(formatUpdated(target.generatedAt))}</p>
   <section class="results" aria-labelledby="results-title-${escapeHtml(target.meta.id)}">
     <h2 id="results-title-${escapeHtml(target.meta.id)}" class="visually-hidden">Hydra build progress for ${escapeHtml(target.meta.label)}</h2>
     <div class="table-head" aria-hidden="true">
@@ -150,6 +149,7 @@ function renderPanes(targets: Record<string, TargetData>): string {
       ${renderRows(target)}
     </div>
   </section>
+<p class="updated">Last updated: ${escapeHtml(formatUpdated(target.generatedAt))}</p>
 </section>`;
     })
     .join("");
