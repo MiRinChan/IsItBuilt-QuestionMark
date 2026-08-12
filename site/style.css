@@ -1,12 +1,13 @@
 :root {
   color-scheme: light;
-  --ink: #090909;
-  --paper: #f8f8f6;
-  --panel: #dddddd;
-  --line: #b6b6b6;
-  --green: #a7d99a;
-  --medium: #d6d3a0;
-  --low: #c5c5c5;
+  --ink: #000;
+  --paper: #fff;
+  --dot-color: #000;
+  --dot: radial-gradient(circle, var(--dot-color) 1px, transparent 1.6px);
+  --dot-sparse: 11px;
+  --dot-light: 8px;
+  --dot-mid: 5px;
+  --dot-dense: 3.5px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -76,7 +77,7 @@ body {
   z-index: 50;
   inset: 0;
   display: none;
-  background: rgb(0 0 0 / 45%);
+  background: rgb(0 0 0 / 50%);
 }
 
 .help-toggle:checked ~ .help-backdrop {
@@ -96,16 +97,18 @@ dialog.help-dialog {
   transform: translate(-50%, -50%);
   margin: 0;
   width: min(620px, calc(100% - 28px));
-  border: 2px solid var(--ink);
+  border: 3px solid var(--ink);
   padding: 28px;
   color: var(--ink);
   background: var(--paper);
+  box-shadow: 6px 6px 0 var(--ink);
 }
 
 .help-dialog h2 {
   margin: 0 42px 18px 0;
   font-size: clamp(1.45rem, 4vw, 2.2rem);
-  font-weight: 400;
+  font-weight: 900;
+  letter-spacing: -0.02em;
 }
 
 .help-dialog p {
@@ -114,10 +117,10 @@ dialog.help-dialog {
 
 .help-dialog pre {
   overflow-x: auto;
-  border: 1px solid var(--line);
+  border: 2px solid var(--ink);
   margin: 12px 0;
   padding: 12px;
-  background: var(--panel);
+  background: var(--paper);
 }
 
 .help-close {
@@ -129,8 +132,9 @@ dialog.help-dialog {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--ink);
+  border: 2px solid var(--ink);
   font: 400 1.6rem/1 Arial, Helvetica, sans-serif;
+  background: var(--paper);
   cursor: pointer;
   user-select: none;
 }
@@ -151,7 +155,7 @@ main {
   max-width: 1050px;
   margin: 0;
   font-size: clamp(3rem, 8.5vw, 7.6rem);
-  font-weight: 400;
+  font-weight: 900;
   line-height: 0.94;
   letter-spacing: -0.055em;
 }
@@ -183,24 +187,14 @@ main {
 }
 
 .updated {
-  margin: 18px 0 0;
+  margin: 5px 0 0;
   font-size: clamp(0.9rem, 1.5vw, 1.05rem);
-}
-
-.updated {
-  margin-top: 5px;
-}
-
-.feedback {
-  min-height: 1.3em;
-  margin: 7px 0 0;
-  font-family: "Courier New", Courier, monospace;
-  font-size: 0.82rem;
 }
 
 .results {
   margin-top: 34px;
-  background: var(--panel);
+  border: 2px solid var(--ink);
+  background: var(--paper);
 }
 
 .table-head,
@@ -212,8 +206,10 @@ main {
 
 .table-head {
   padding: 8px 12px;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
   font-size: 1rem;
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .table-head span:first-child {
@@ -225,7 +221,7 @@ main {
 }
 
 .result {
-  border-bottom: 1px solid var(--line);
+  border-bottom: 2px solid var(--ink);
 }
 
 .result:last-child {
@@ -245,8 +241,8 @@ main {
 }
 
 .result-summary:hover {
-  outline: 1px solid var(--ink);
-  outline-offset: -1px;
+  outline: 2px solid var(--ink);
+  outline-offset: -2px;
 }
 
 .cell {
@@ -266,15 +262,18 @@ main {
 
 .commit-hash {
   font: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 3px;
+  font-weight: 700;
+  background: var(--paper);
+  padding: 0 4px;
+  border: 1px solid var(--ink);
 }
 
-.commit-link {
-  flex: 0 0 auto;
-  font-family: Arial, Helvetica, sans-serif;
-  text-decoration: none;
+.commit-date {
+  background: var(--paper);
+  padding: 0 4px;
+  border: 1px solid var(--ink);
+  font-size: 0.8em;
+  white-space: nowrap;
 }
 
 .rate-cell {
@@ -286,29 +285,37 @@ main {
   position: absolute;
   z-index: 0;
   inset: 0 auto 0 0;
-  background: var(--low);
+  background-image: var(--dot);
+  background-size: var(--dot-sparse) var(--dot-sparse);
 }
 
 .row-bar.high {
-  background: var(--green);
+  background-size: var(--dot-dense) var(--dot-dense);
 }
 
 .row-bar.medium {
-  background: var(--medium);
+  background-size: var(--dot-mid) var(--dot-mid);
 }
 
 .row-bar.ready {
-  background: var(--green);
+  background-image: none;
+  background-color: var(--ink);
 }
 
 .metric-text {
   position: relative;
   white-space: nowrap;
+  background: var(--paper);
+  padding: 0 4px;
+  border: 1px solid var(--ink);
 }
 
 .metric-sub {
-  display: block;
-  color: #444;
+  display: inline-block;
+  margin-top: 2px;
+  background: var(--paper);
+  padding: 0 4px;
+  border: 1px solid var(--ink);
   font-size: 0.72em;
   font-weight: 400;
   white-space: nowrap;
@@ -317,15 +324,15 @@ main {
 .details {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
-  gap: 1px;
-  border-top: 1px solid var(--line);
-  background: var(--line);
+  gap: 2px;
+  border-top: 2px solid var(--ink);
+  background: var(--ink);
 }
 
 .count-detail {
   min-width: 0;
   padding: 10px 12px;
-  background: #eeeeee;
+  background: var(--paper);
 }
 
 .count-name {
@@ -343,32 +350,33 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
-.quality-note {
-  grid-column: 1 / -1;
-  margin: 0;
-  padding: 8px 12px;
-  background: #efefef;
-  font-size: 0.82rem;
-}
-
 .row-links {
   grid-column: 1 / -1;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   padding: 8px 12px;
-  background: #efefef;
+  background: var(--paper);
 }
 
 .hydra-link {
+  background: var(--paper);
+  padding: 2px 6px;
+  border: 1px solid var(--ink);
   font-size: 0.82rem;
+  text-decoration: none;
+}
+
+.hydra-link:hover {
+  color: var(--paper);
+  background: var(--ink);
 }
 
 .revision-line {
   grid-column: 1 / -1;
   margin: 0;
   padding: 8px 12px;
-  background: #e9e9e9;
+  background: var(--paper);
   font-family: "Courier New", Courier, monospace;
   font-size: 0.82rem;
   overflow-wrap: anywhere;
@@ -379,6 +387,9 @@ main {
 }
 
 .revision-line code {
+  background: var(--paper);
+  padding: 0 4px;
+  border: 1px solid var(--ink);
   font-family: inherit;
   user-select: all;
 }
@@ -389,12 +400,6 @@ main {
   font-size: 1rem;
 }
 
-.commit-date {
-  color: #444;
-  font-size: 0.8em;
-  white-space: nowrap;
-}
-
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -403,6 +408,19 @@ main {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);
   white-space: nowrap;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --ink: #ececec;
+    --paper: #0f0f0f;
+    --dot-color: #ececec;
+  }
+
+  .help-backdrop {
+    background: rgb(255 255 255 / 20%);
+  }
 }
 
 @media (max-width: 700px) {
