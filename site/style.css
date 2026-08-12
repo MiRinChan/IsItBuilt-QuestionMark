@@ -57,29 +57,109 @@ body {
   display: none;
 }
 
-.help {
-  width: min(620px, calc(100% - 28px));
-  margin-top: 48px;
-  border-top: 2px solid var(--ink);
-  padding-top: 24px;
+.help-toggle {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
 }
 
-.help h2 {
-  margin: 0 0 18px 0;
+.help-open {
+  position: fixed;
+  z-index: 40;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--ink);
+  font: 700 1.5rem/1 Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  cursor: pointer;
+  user-select: none;
+}
+
+.help-open:hover,
+.help-toggle:checked ~ .help-open,
+.help-toggle:focus-visible ~ .help-open {
+  color: var(--paper);
+  background: var(--ink);
+  outline: none;
+}
+
+.help-backdrop {
+  position: fixed;
+  z-index: 50;
+  inset: 0;
+  display: none;
+  background: rgb(0 0 0 / 45%);
+}
+
+.help-toggle:checked ~ .help-backdrop {
+  display: block;
+}
+
+dialog.help-dialog {
+  display: none;
+}
+
+.help-toggle:checked ~ dialog.help-dialog {
+  display: block;
+  position: fixed;
+  z-index: 60;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: 0;
+  width: min(620px, calc(100% - 28px));
+  border: 2px solid var(--ink);
+  padding: 28px;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.help-dialog h2 {
+  margin: 0 42px 18px 0;
   font-size: clamp(1.45rem, 4vw, 2.2rem);
   font-weight: 400;
 }
 
-.help p {
+.help-dialog p {
   line-height: 1.5;
 }
 
-.help pre {
+.help-dialog pre {
   overflow-x: auto;
   border: 1px solid var(--line);
   margin: 12px 0;
   padding: 12px;
   background: var(--panel);
+}
+
+.help-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ink);
+  font: 400 1.6rem/1 Arial, Helvetica, sans-serif;
+  cursor: pointer;
+  user-select: none;
+}
+
+.help-close:hover {
+  color: var(--paper);
+  background: var(--ink);
 }
 
 
@@ -367,6 +447,17 @@ main {
 
   .details {
     grid-template-columns: 1fr;
+  }
+
+  .help-open {
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .help-dialog {
+    padding: 20px;
   }
 }
 

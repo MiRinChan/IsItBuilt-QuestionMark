@@ -179,12 +179,19 @@ function renderSwitchCss(targets: Record<string, TargetData>): string {
   return `<style>\n${rules.join("\n")}\n</style>`;
 }
 
-function renderHelp(): string {
+function renderHelpToggle(): string {
+  return `<input type="checkbox" id="help-toggle" class="help-toggle" />` +
+    `<label for="help-toggle" class="help-open" aria-label="Help">?</label>`;
+}
+
+function renderHelpDialog(): string {
   const lockCommand = [
     "nix flake lock --override-input nixpkgs \\",
     "  github:NixOS/nixpkgs/<commit hash>",
   ].join("\n");
-  return `<section class="help" id="help" aria-labelledby="help-title">
+  return `<label for="help-toggle" class="help-backdrop" aria-hidden="true"></label>
+<dialog class="help-dialog" aria-labelledby="help-title">
+  <label for="help-toggle" class="help-close" aria-label="Close help">×</label>
   <h2 id="help-title">How to read this page</h2>
   <p>
     Each row is one channel commit and the Hydra evaluation that builds it. The bar
@@ -201,9 +208,10 @@ function renderHelp(): string {
   <pre><code>${escapeHtml(lockCommand)}</code></pre>
   <p>
     Inspect any evaluation directly at <code>hydra.nixos.org/eval/&lt;id&gt;</code>. The
-    switch above is a plain CSS radio toggle — no JavaScript anywhere on this page.
+    channel switch and this help dialog are both pure CSS (a radio toggle and a
+    checkbox-controlled <code>&lt;dialog&gt;</code>) — no JavaScript anywhere on this page.
   </p>
-</section>`;
+</dialog>`;
 }
 
 export function renderPage(data: DataFile): string {
@@ -223,6 +231,7 @@ export function renderPage(data: DataFile): string {
     ${renderSwitchCss(targets)}
   </head>
   <body>
+    ${renderHelpToggle()}
     <main>
       <header class="hero">
         <h1>Is it<br />built on Hydra<br />yet?</h1>
@@ -230,8 +239,8 @@ export function renderPage(data: DataFile): string {
       ${renderSwitchInputs(targets)}
       ${renderNav(targets)}
       ${renderPanes(targets)}
-      ${renderHelp()}
     </main>
+    ${renderHelpDialog()}
   </body>
 </html>
 `;

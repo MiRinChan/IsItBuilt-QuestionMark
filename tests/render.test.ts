@@ -156,10 +156,14 @@ describe("page rendering", () => {
     expect(html).toContain("No measurements yet.");
   });
 
-  test("help section explains the switch and stays script-free", () => {
+  test("help is a pure-CSS dialog controlled by a checkbox", () => {
     const html = renderPage(data);
+    expect(html).toContain('id="help-toggle"');
+    expect(html).toContain("<dialog class=\"help-dialog\"");
     expect(html).toContain("nix flake lock --override-input nixpkgs \\");
-    expect(html).toContain("plain CSS radio toggle");
+    expect(html).toContain("checkbox-controlled");
+    expect(html).toContain("label for=\"help-toggle\" class=\"help-backdrop\"");
+    expect(html).toContain("label for=\"help-toggle\" class=\"help-open\"");
     expect(html).not.toContain("<script");
   });
 
