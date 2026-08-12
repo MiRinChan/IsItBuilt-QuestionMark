@@ -12,10 +12,13 @@ scanning, and the published site is plain HTML, CSS, JavaScript, and JSON.
 
 ## What is measured
 
-The two targets in [`config.json`](config.json) mirror the official channel
+The three targets in [`config.json`](config.json) mirror the official channel
 mapping used by [`hydra-check`](https://github.com/nix-community/hydra-check):
 
 - **nixos-unstable** — Hydra jobset `nixos/unstable` (the NixOS channel)
+- **nixos-unstable-small** — Hydra jobset `nixos/unstable-small` (the fast,
+  trimmed NixOS channel; it contains only a small job list, so its evals finish
+  quickly and usually read fully built)
 - **nixpkgs-unstable** — Hydra jobset `nixpkgs/unstable` (the package channel)
 
 For each target, the scanner fetches the jobset's evaluation history page

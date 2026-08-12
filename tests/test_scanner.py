@@ -36,6 +36,15 @@ class EvalsPageParsingTests(unittest.TestCase):
         self.assertEqual(rows[0]["eval"], 1828030)
         self.assertEqual(rows[0]["rev"], "044bfe75bfe4c7bbe043dc17b5e42ea823b84a09")
 
+    def test_unstable_small_fixture_missing_cells_default_to_zero(self) -> None:
+        rows = parse_evals_page((FIXTURES / "evals-nixos-unstable-small.html").read_text())
+        self.assertEqual(len(rows), 8)
+        self.assertEqual(rows[0]["eval"], 1828023)
+        self.assertEqual(rows[0]["succeeded"], 120)
+        self.assertEqual(rows[0]["failed"], 0)
+        self.assertEqual(rows[0]["queued"], 0)
+        self.assertIsNone(rows[0]["delta"])
+
     def test_finished_eval_has_zero_queued_and_delta(self) -> None:
         rows = parse_evals_page((FIXTURES / "evals-nixos-unstable.html").read_text())
         finished = next(row for row in rows if row["eval"] == 1827979)
@@ -54,7 +63,7 @@ class EvalsPageParsingTests(unittest.TestCase):
             parse_evals_page("<table><tbody><tr><td>x</td></tr></tbody></table>")
 
     def test_revision_always_full(self) -> None:
-        for fixture in ("evals-nixos-unstable.html", "evals-nixpkgs-unstable.html"):
+        for fixture in ("evals-nixos-unstable.html", "evals-nixpkgs-unstable.html", "evals-nixos-unstable-small.html"):
             for row in parse_evals_page((FIXTURES / fixture).read_text()):
                 self.assertRegex(row["rev"], r"^[0-9a-f]{40}$")
 
