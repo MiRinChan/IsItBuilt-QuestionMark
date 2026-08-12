@@ -104,8 +104,6 @@ function renderRow(row: EvalRow, target: TargetData): string {
     <span class="cell commit-cell">
       <code class="commit-hash">${escapeHtml(row.rev.slice(0, 12))}</code>
       <span class="commit-date">${escapeHtml(formatDate(row.timestamp))}</span>
-      <a class="commit-link" href="${commitUrl}" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
-      <a class="commit-link" href="${evalUrl}" title="Open Hydra evaluation ${row.eval}" target="_blank" rel="noreferrer">⚙</a>
     </span>
     <span class="cell rate-cell">
       <span class="metric-text">${escapeHtml(percent)}</span>
@@ -114,9 +112,10 @@ function renderRow(row: EvalRow, target: TargetData): string {
   </summary>
   <div class="details">
     ${counts}
-    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>${escapeHtml(row.rev)}</code></p></section>
     ${statusNote}
+    <p class="revision-line"><code>${escapeHtml(row.rev)}</code></p>
     <a class="hydra-link" href="${evalUrl}" target="_blank" rel="noreferrer">Open Hydra evaluation ${row.eval} ↗</a>
+    <a class="hydra-link" href="${commitUrl}" target="_blank" rel="noreferrer">GitHub commit ↗</a>
   </div>
 </details>`;
 }

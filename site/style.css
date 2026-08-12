@@ -277,11 +277,6 @@ main {
   text-decoration: none;
 }
 
-.commit-link:hover,
-.commit-link:focus-visible {
-  text-decoration: underline;
-}
-
 .rate-cell {
   text-align: right;
   font-variant-numeric: tabular-nums;
@@ -363,6 +358,21 @@ main {
   font-size: 0.82rem;
 }
 
+.revision-line {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 8px 12px;
+  background: #e9e9e9;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.82rem;
+  overflow-wrap: anywhere;
+  user-select: all;
+}
+
+.revision-line code {
+  font-family: inherit;
+}
+
 .empty {
   margin: 0;
   padding: 30px 12px;
@@ -417,10 +427,6 @@ main {
 
   .cell {
     font-size: 0.82rem;
-  }
-
-  .commit-link {
-    display: none;
   }
 
   .details {
