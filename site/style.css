@@ -351,10 +351,16 @@ main {
   font-size: 0.82rem;
 }
 
-.hydra-link {
+.row-links {
   grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
   padding: 8px 12px;
   background: #efefef;
+}
+
+.hydra-link {
   font-size: 0.82rem;
 }
 

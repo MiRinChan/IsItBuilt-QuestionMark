@@ -94,10 +94,6 @@ function renderRow(row: EvalRow, target: TargetData): string {
     )
     .join("");
 
-  const statusNote = row.status
-    ? `<p class="quality-note">Hydra reports: ${escapeHtml(row.status)}.</p>`
-    : "";
-
   return `<details class="result">
   <summary class="result-summary">
     <span class="row-bar ${barClass(row)}" style="width: ${width}%"></span>
@@ -112,10 +108,11 @@ function renderRow(row: EvalRow, target: TargetData): string {
   </summary>
   <div class="details">
     ${counts}
-    ${statusNote}
     <p class="revision-line"><code>${escapeHtml(row.rev)}</code></p>
-    <a class="hydra-link" href="${evalUrl}" target="_blank" rel="noreferrer">Open Hydra evaluation ${row.eval} ↗</a>
-    <a class="hydra-link" href="${commitUrl}" target="_blank" rel="noreferrer">GitHub commit ↗</a>
+    <div class="row-links">
+      <a class="hydra-link" href="${evalUrl}" target="_blank" rel="noreferrer">Open Hydra evaluation ${row.eval} ↗</a>
+      <a class="hydra-link" href="${commitUrl}" target="_blank" rel="noreferrer">GitHub commit ↗</a>
+    </div>
   </div>
 </details>`;
 }

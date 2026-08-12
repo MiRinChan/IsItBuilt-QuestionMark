@@ -142,7 +142,6 @@ describe("page rendering", () => {
     expect(html).toContain("https://github.com/NixOS/nixpkgs/commit/867dcbc30bafe3c862ef88620f2e7a109d7d3be5");
     expect(html).toContain("https://hydra.nixos.org/eval/1828024");
     expect(html).toContain("867dcbc30bafe3c862ef88620f2e7a109d7d3be5");
-    expect(html).toContain("Hydra reports: Eval Errors.");
     expect(html).toContain("Last updated: 2026-08-12 12:00 UTC");
     expect(html).toContain("No measurements yet.");
   });
