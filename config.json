@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "historyLimit": 30,
+  "hydraUrl": "https://hydra.nixos.org",
+  "http": {
+    "connectTimeoutSeconds": 20,
+    "requestTimeoutSeconds": 120,
+    "retries": 3,
+    "retryBackoffSeconds": 4
+  },
+  "targets": [
+    {
+      "id": "nixos-unstable",
+      "label": "nixos-unstable",
+      "jobset": "nixos/unstable",
+      "repository": "NixOS/nixpkgs",
+      "repositoryUrl": "https://github.com/NixOS/nixpkgs",
+      "branch": "nixos-unstable"
+    },
+    {
+      "id": "nixpkgs-unstable",
+      "label": "nixpkgs-unstable",
+      "jobset": "nixpkgs/unstable",
+      "repository": "NixOS/nixpkgs",
+      "repositoryUrl": "https://github.com/NixOS/nixpkgs",
+      "branch": "nixpkgs-unstable"
+    }
+  ]
+}

@@ -1,0 +1,398 @@
+:root {
+  color-scheme: light;
+  --ink: #090909;
+  --paper: #f8f8f6;
+  --panel: #dddddd;
+  --line: #b6b6b6;
+  --green: #a7d99a;
+  --medium: #d6d3a0;
+  --low: #c5c5c5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.help-open {
+  position: fixed;
+  z-index: 10;
+  top: 18px;
+  right: 18px;
+  width: 44px;
+  height: 44px;
+  border: 2px solid var(--ink);
+  padding: 0;
+  font: 700 1.5rem/1 Arial, Helvetica, sans-serif;
+  background: var(--paper);
+  cursor: pointer;
+}
+
+.help-open:hover,
+.help-open:focus-visible,
+.help-close:hover,
+.help-close:focus-visible {
+  color: var(--paper);
+  background: var(--ink);
+  outline: none;
+}
+
+.help-dialog {
+  width: min(620px, calc(100% - 28px));
+  border: 2px solid var(--ink);
+  padding: 28px;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+.help-dialog::backdrop {
+  background: rgb(0 0 0 / 45%);
+}
+
+.help-dialog h2 {
+  margin: 0 42px 18px 0;
+  font-size: clamp(1.45rem, 4vw, 2.2rem);
+  font-weight: 400;
+}
+
+.help-dialog p {
+  line-height: 1.5;
+}
+
+.help-dialog pre {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  margin: 12px 0;
+  padding: 12px;
+  background: var(--panel);
+}
+
+.help-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--ink);
+  padding: 0;
+  font: 400 1.6rem/1 Arial, Helvetica, sans-serif;
+  background: transparent;
+  cursor: pointer;
+}
+
+
+main {
+  width: min(1120px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: clamp(28px, 6vw, 72px) 0 36px;
+}
+
+.hero h1 {
+  max-width: 1050px;
+  margin: 0;
+  font-size: clamp(3rem, 8.5vw, 7.6rem);
+  font-weight: 400;
+  line-height: 0.94;
+  letter-spacing: -0.055em;
+}
+
+.hero code {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.88em;
+  font-weight: 900;
+}
+
+.target-switch {
+  display: inline;
+  border: 0;
+  border-bottom: 0.07em solid currentColor;
+  padding: 0;
+  font: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.target-switch:hover,
+.target-switch:focus-visible {
+  color: var(--paper);
+  background: var(--ink);
+  outline: 0.04em solid var(--ink);
+}
+
+.updated {
+  margin: 18px 0 0;
+  font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+}
+
+.updated {
+  margin-top: 5px;
+}
+
+.feedback {
+  min-height: 1.3em;
+  margin: 7px 0 0;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.82rem;
+}
+
+.results {
+  margin-top: 34px;
+  background: var(--panel);
+}
+
+.table-head,
+.result-summary {
+  display: grid;
+  grid-template-columns: minmax(13rem, 1.25fr) minmax(14rem, 1fr);
+  align-items: stretch;
+}
+
+.table-head {
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--ink);
+  font-size: 1rem;
+}
+
+.table-head span:first-child {
+  font-weight: 700;
+}
+
+.table-head span:last-child {
+  text-align: right;
+}
+
+.result {
+  border-bottom: 1px solid var(--line);
+}
+
+.result:last-child {
+  border-bottom: 0;
+}
+
+.result-summary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  list-style: none;
+  cursor: pointer;
+}
+
+.result-summary::-webkit-details-marker {
+  display: none;
+}
+
+.result-summary:hover {
+  outline: 1px solid var(--ink);
+  outline-offset: -1px;
+}
+
+.cell {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  padding: 11px 12px;
+  font-size: clamp(0.94rem, 2vw, 1.2rem);
+}
+
+.commit-cell {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.copy-commit {
+  overflow: hidden;
+  border: 0;
+  padding: 0;
+  font: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  text-overflow: ellipsis;
+  background: transparent;
+  cursor: copy;
+}
+
+.commit-link {
+  flex: 0 0 auto;
+  font-family: Arial, Helvetica, sans-serif;
+  text-decoration: none;
+}
+
+.commit-link:hover,
+.commit-link:focus-visible {
+  text-decoration: underline;
+}
+
+.rate-cell {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.row-bar {
+  position: absolute;
+  z-index: 0;
+  inset: 0 auto 0 0;
+  background: var(--low);
+}
+
+.row-bar.high {
+  background: var(--green);
+}
+
+.row-bar.medium {
+  background: var(--medium);
+}
+
+.row-bar.ready {
+  background: var(--green);
+}
+
+.metric-text {
+  position: relative;
+  white-space: nowrap;
+}
+
+.metric-sub {
+  display: block;
+  color: #444;
+  font-size: 0.72em;
+  font-weight: 400;
+  white-space: nowrap;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+  gap: 1px;
+  border-top: 1px solid var(--line);
+  background: var(--line);
+}
+
+.count-detail {
+  min-width: 0;
+  padding: 10px 12px;
+  background: #eeeeee;
+}
+
+.count-name {
+  overflow: hidden;
+  margin: 0 0 4px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 0.8rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.count-value {
+  margin: 0;
+  font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.quality-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 8px 12px;
+  background: #efefef;
+  font-size: 0.82rem;
+}
+
+.hydra-link {
+  grid-column: 1 / -1;
+  padding: 8px 12px;
+  background: #efefef;
+  font-size: 0.82rem;
+}
+
+.empty {
+  margin: 0;
+  padding: 30px 12px;
+  font-size: 1rem;
+}
+
+.commit-date {
+  color: #444;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (max-width: 700px) {
+  main {
+    width: min(100% - 20px, 1120px);
+    padding-top: 24px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.7rem, 14vw, 5rem);
+    line-height: 0.96;
+  }
+
+  .hero {
+    padding-right: 44px;
+  }
+
+  .table-head,
+  .result-summary {
+    grid-template-columns: minmax(8.6rem, 1.05fr) minmax(9.6rem, 1fr);
+  }
+
+  .table-head,
+  .cell {
+    padding-right: 7px;
+    padding-left: 7px;
+  }
+
+  .table-head {
+    font-size: 0.72rem;
+  }
+
+  .cell {
+    font-size: 0.82rem;
+  }
+
+  .commit-link {
+    display: none;
+  }
+
+  .details {
+    grid-template-columns: 1fr;
+  }
+
+  .help-open {
+    top: 10px;
+    right: 10px;
+    width: 38px;
+    height: 38px;
+  }
+
+  .help-dialog {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    scroll-behavior: auto !important;
+  }
+}

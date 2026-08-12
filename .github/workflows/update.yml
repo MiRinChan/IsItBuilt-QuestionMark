@@ -1,0 +1,61 @@
+name: Update build progress and deploy Pages
+
+on:
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: isitbuilt-pages
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Scan Hydra build progress
+        run: python3 src/scanner.py --config config.json --data site/data.json
+
+      - name: Validate publish artifact
+        run: >-
+          python3 -m json.tool site/data.json >/dev/null &&
+          test -s site/index.html &&
+          test -s site/app.js &&
+          test -s site/style.css
+
+      - name: Persist measurement history
+        env:
+          TARGET_BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add site/data.json
+          if git diff --cached --quiet; then
+            echo "No data change to commit."
+          else
+            git commit -m "data: update Hydra build progress [skip ci]"
+            git push origin "HEAD:${TARGET_BRANCH}" || echo "::warning::Could not persist data commit; Pages will still deploy this run."
+          fi
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

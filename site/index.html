@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="How far has the current nixos-unstable / nixpkgs-unstable commit been built on Hydra?"
+    />
+    <title>Is nixos-unstable built on Hydra yet?</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <button
+      id="help-open"
+      class="help-open"
+      type="button"
+      aria-haspopup="dialog"
+      aria-controls="help-dialog"
+      aria-label="Help"
+    >
+      ?
+    </button>
+    <main>
+      <header class="hero">
+        <h1>
+          Is<br /><button
+            id="target-switch"
+            class="target-switch"
+            type="button"
+            aria-label="Switch channel"
+          >
+            <code id="target-label">nixos-unstable</code>
+          </button>
+          <br />built on Hydra yet?
+        </h1>
+      </header>
+
+      <p id="feedback" class="feedback" aria-live="polite"></p>
+
+      <section class="results" aria-labelledby="results-title">
+        <h2 id="results-title" class="visually-hidden">
+          Hydra build progress by channel commit
+        </h2>
+        <div class="table-head" aria-hidden="true">
+          <span>commit</span>
+          <span>build progress</span>
+        </div>
+        <div id="rows" class="rows" aria-live="polite">
+          <p class="empty">Loading data…</p>
+        </div>
+      </section>
+      <p id="updated" class="updated">Last updated: loading…</p>
+    </main>
+
+    <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title">
+      <form method="dialog">
+        <button class="help-close" type="submit" aria-label="Close help">
+          ×
+        </button>
+      </form>
+      <h2 id="help-title">
+        Is <code id="help-target">nixos-unstable</code> built on Hydra yet?
+      </h2>
+      <p>
+        Each row is one channel commit and the Hydra evaluation that builds it.
+        The bar shows how much of the channel's package set Hydra has compiled:
+      </p>
+      <pre><code>succeeded / (succeeded + failed + queued)</code></pre>
+      <p>
+        When <strong>queued</strong> is zero, everything has been built and
+        upgrading to that commit downloads binaries from
+        <code>cache.nixos.org</code> — nothing is compiled locally. While
+        <strong>queued</strong> is non-zero, upgrading would make your machine
+        compile the packages Hydra has not finished yet.
+      </p>
+      <p>
+        Pin a fully built commit in <code>flake.lock</code> before upgrading:
+      </p>
+      <pre><code id="lock-command">nix flake lock --override-input nixpkgs \
+  github:NixOS/nixpkgs/&lt;your commit&gt;</code></pre>
+      <p>
+        Inspect any evaluation directly at
+        <code>hydra.nixos.org/eval/&lt;id&gt;</code>, or check the live jobset
+        on <a id="jobset-link" href="https://hydra.nixos.org/jobset/nixos/unstable" target="_blank" rel="noreferrer">Hydra</a>.
+      </p>
+    </dialog>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

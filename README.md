@@ -1,0 +1,108 @@
+# How far has nixos-unstable been built on Hydra?
+
+A static GitHub Pages dashboard that shows, for every recent `nixos-unstable`
+(and `nixpkgs-unstable`) channel commit, how much of the package set Hydra has
+already compiled. When a commit's evaluation shows zero queued builds, all
+binaries are available from `cache.nixos.org` and upgrading will not compile
+anything locally. While builds are still queued, upgrading would make your own
+machine compile what Hydra has not finished.
+
+There is no server and no Cloudflare Worker: GitHub Actions performs the
+scanning, and the published site is plain HTML, CSS, JavaScript, and JSON.
+
+## What is measured
+
+The two targets in [`config.json`](config.json) mirror the official channel
+mapping used by [`hydra-check`](https://github.com/nix-community/hydra-check):
+
+- **nixos-unstable** — Hydra jobset `nixos/unstable` (the NixOS channel)
+- **nixpkgs-unstable** — Hydra jobset `nixpkgs/unstable` (the package channel)
+
+For each target, the scanner fetches the jobset's evaluation history page
+(`/jobset/<jobset>/evals`) and records, per evaluation:
+
+- the exact nixpkgs commit revision,
+- how many jobs succeeded,
+- how many jobs failed,
+- how many jobs are still queued or running.
+
+One HTTP request per target is enough: Hydra's evaluation list already embeds
+the full commit SHA, the aggregate job counts, and the change vs. the previous
+evaluation. The row metric shown on the page is
+
+```text
+succeeded / (succeeded + failed + queued)
+```
+
+A row is *fully built* when `queued == 0`. Evaluations are scanned
+incrementally: previous results are kept, fresh counts replace stale ones, and
+rows beyond `historyLimit` are pruned. Generated JSON is validated and written
+atomically; a failed refresh never replaces a previous good result.
+
+Hydra's own pages are linked from every row for direct inspection
+(`hydra.nixos.org/eval/<id>`).
+
+## Repository layout
+
+```text
+config.json            targets, history limit, HTTP settings
+src/scanner.py         stdlib-only scanner (urllib, re, json)
+site/                  static site: index.html, app.js, style.css, data.json
+tests/                 scanner unit tests (fixture HTML) and frontend tests
+.github/workflows/     CI (nix flake check) and the Pages update workflow
+```
+
+## Running the scanner
+
+```bash
+nix develop --command python3 src/scanner.py --config config.json --data site/data.json
+```
+
+The scanner uses only the Python standard library; the flake's dev shell just
+provides Python, Node, and actionlint.
+
+## Data format
+
+`site/data.json`:
+
+```json
+{
+  "schemaVersion": 1,
+  "generatedAt": "2026-08-12T12:00:00Z",
+  "targets": {
+    "nixos-unstable": {
+      "meta": {
+        "id": "nixos-unstable",
+        "label": "nixos-unstable",
+        "jobset": "nixos/unstable",
+        "repository": "NixOS/nixpkgs",
+        "repositoryUrl": "https://github.com/NixOS/nixpkgs",
+        "branch": "nixos-unstable"
+      },
+      "generatedAt": "2026-08-12T12:00:00Z",
+      "lastAttemptAt": "2026-08-12T12:00:00Z",
+      "rows": [
+        {
+          "eval": 1828024,
+          "rev": "867dcbc30bafe3c862ef88620f2e7a109d7d3be5",
+          "timestamp": "2026-08-12T06:44:42Z",
+          "succeeded": 146637,
+          "failed": 2590,
+          "queued": 5710,
+          "delta": null,
+          "status": "Eval Errors"
+        }
+      ]
+    }
+  }
+}
+```
+
+## When should you upgrade?
+
+1. Open the page and look at the newest row for your channel.
+2. If it shows **`N queued`**, the channel is still being built; wait until the
+   row reads **fully built** (or pin an older fully built commit with
+   `nix flake lock --override-input nixpkgs github:NixOS/nixpkgs/<commit>`).
+3. Only then upgrade — every binary comes from the cache and nothing needs to
+   be compiled on your machine.
