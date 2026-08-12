@@ -109,49 +109,71 @@ describe("formatting", () => {
 });
 
 describe("page rendering", () => {
-  test("renders index for the first target and a page per target", () => {
+  test("renders a single page containing every target", () => {
     const pages = renderSite(data);
-    expect(pages.map((page) => page.path)).toEqual(["index.html", "nixpkgs-unstable.html"]);
-    for (const page of pages) {
-      expect(page.html).not.toMatch(/<script/i);
+    expect(pages).toHaveLength(1);
+    expect(pages[0].path).toBe("index.html");
+    expect(pages[0].html).not.toMatch(/<script/i);
+  });
+
+  test("each target has a radio input, a label and a pane", () => {
+    const html = renderPage(data);
+    for (const id of ["nixos-unstable", "nixpkgs-unstable"]) {
+      expect(html).toContain(`id="target-${id}"`);
+      expect(html).toContain(`for="target-${id}"`);
+      expect(html).toContain(`id="pane-${id}"`);
     }
   });
 
-  test("index page contains rows, metrics, links and help", () => {
-    const [index] = renderSite(data);
-    expect(index.html).toContain("Is nixos-unstable built on Hydra yet?");
-    expect(index.html).toContain('href="./nixpkgs-unstable.html"');
-    expect(index.html).toContain('aria-current="page"');
-    expect(index.html).toContain("94.5%");
-    expect(index.html).toContain("5,898 queued · 2,572 failed");
-    expect(index.html).toContain("https://github.com/NixOS/nixpkgs/commit/867dcbc30bafe3c862ef88620f2e7a109d7d3be5");
-    expect(index.html).toContain("https://hydra.nixos.org/eval/1828024");
-    expect(index.html).toContain("867dcbc30bafe3c862ef88620f2e7a109d7d3be5");
-    expect(index.html).toContain("Hydra reports: Eval Errors.");
-    expect(index.html).toContain("nix flake lock --override-input nixpkgs \\");
-    expect(index.html).toContain("Last updated: 2026-08-12 12:00 UTC");
-    expect(index.html).not.toContain("<script");
+  test("first target is checked by default and panes toggle via CSS", () => {
+    const html = renderPage(data);
+    expect(html).toContain('id="target-nixos-unstable" name="target" class="target-input" checked');
+    expect(html).not.toContain('id="target-nixpkgs-unstable" name="target" class="target-input" checked');
+    expect(html).toContain("#target-nixos-unstable:checked ~ #pane-nixos-unstable { display: block; }");
+    expect(html).toContain("#target-nixpkgs-unstable:checked ~ #pane-nixpkgs-unstable { display: block; }");
+    expect(html).toContain('#target-nixos-unstable:checked ~ .targets label[for="target-nixos-unstable"]');
   });
 
-  test("second target page links back to the index", () => {
-    const [, nixpkgsPage] = renderSite(data);
-    expect(nixpkgsPage.html).toContain("Is nixpkgs-unstable built on Hydra yet?");
-    expect(nixpkgsPage.html).toContain('href="./index.html"');
-    expect(nixpkgsPage.html).toContain("No measurements yet.");
+  test("radio inputs are siblings of the panes, before the nav", () => {
+    const html = renderPage(data);
+    const inputPos = html.indexOf('<input type="radio"');
+    const navPos = html.indexOf('<nav class="targets"');
+    const panePos = html.indexOf('id="pane-nixos-unstable"');
+    expect(inputPos).toBeGreaterThan(-1);
+    expect(inputPos).toBeLessThan(navPos);
+    expect(navPos).toBeLessThan(panePos);
   });
 
-  test("empty target still renders a valid page", () => {
-    const html = renderPage(target("nixos-unstable", []), data.targets);
+  test("all targets' rows and metrics are present", () => {
+    const html = renderPage(data);
+    expect(html).toContain("94.5%");
+    expect(html).toContain("5,898 queued · 2,572 failed");
+    expect(html).toContain("https://github.com/NixOS/nixpkgs/commit/867dcbc30bafe3c862ef88620f2e7a109d7d3be5");
+    expect(html).toContain("https://hydra.nixos.org/eval/1828024");
+    expect(html).toContain("867dcbc30bafe3c862ef88620f2e7a109d7d3be5");
+    expect(html).toContain("Hydra reports: Eval Errors.");
+    expect(html).toContain("Last updated: 2026-08-12 12:00 UTC");
     expect(html).toContain("No measurements yet.");
+  });
+
+  test("help section explains the switch and stays script-free", () => {
+    const html = renderPage(data);
+    expect(html).toContain("nix flake lock --override-input nixpkgs \\");
+    expect(html).toContain("plain CSS radio toggle");
     expect(html).not.toContain("<script");
   });
 
   test("delta and full revision appear in the details", () => {
-    const html = renderPage(
-      target("nixos-unstable", [row({ delta: "+208", queued: 0 })]),
-      data.targets,
-    );
+    const single: DataFile = {
+      ...data,
+      targets: { "nixos-unstable": target("nixos-unstable", [row({ delta: "+208", queued: 0 })]) },
+    };
+    const html = renderPage(single);
     expect(html).toContain("+208");
     expect(html).toContain("fully built");
+  });
+
+  test("empty data is rejected", () => {
+    expect(() => renderSite({ ...data, targets: {} })).toThrow("no targets");
   });
 });

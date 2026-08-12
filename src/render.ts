@@ -121,17 +121,6 @@ function renderRow(row: EvalRow, target: TargetData): string {
 </details>`;
 }
 
-function renderNav(targets: Record<string, TargetData>, currentId: string): string {
-  const indexId = Object.keys(targets)[0];
-  const entries = Object.values(targets).map((target) => {
-    const id = target.meta.id;
-    const href = id === indexId ? "./index.html" : `./${id}.html`;
-    const selected = id === currentId ? " class=\"selected\" aria-current=\"page\"" : "";
-    return `<a href="${href}"${selected}>${escapeHtml(target.meta.label)}</a>`;
-  });
-  return `<nav class="targets" aria-label="Channel">${entries.join("")}</nav>`;
-}
-
 function renderRows(target: TargetData): string {
   if (!target.rows.length) {
     return `<p class="empty">No measurements yet. The scheduled scanner will populate this page.</p>`;
@@ -139,17 +128,67 @@ function renderRows(target: TargetData): string {
   return target.rows.map((row) => renderRow(row, target)).join("");
 }
 
-function renderHelp(target: TargetData): string {
+function renderSwitchInputs(targets: Record<string, TargetData>): string {
+  const ids = Object.keys(targets);
+  return ids
+    .map((id, index) => {
+      const checked = index === 0 ? " checked" : "";
+      return `<input type="radio" id="target-${escapeHtml(id)}" name="target" class="target-input"${checked} />`;
+    })
+    .join("");
+}
+
+function renderNav(targets: Record<string, TargetData>): string {
+  const labels = Object.keys(targets)
+    .map((id) => `<label for="target-${escapeHtml(id)}">${escapeHtml(targets[id].meta.label)}</label>`)
+    .join("");
+  return `<nav class="targets" aria-label="Channel">${labels}</nav>`;
+}
+
+function renderPanes(targets: Record<string, TargetData>): string {
+  return Object.values(targets)
+    .map((target) => {
+      const id = target.meta.id;
+      return `<section id="pane-${escapeHtml(id)}" class="target-pane">
+  <p class="updated">Last updated: ${escapeHtml(formatUpdated(target.generatedAt))}</p>
+  <section class="results" aria-labelledby="results-title-${escapeHtml(id)}">
+    <h2 id="results-title-${escapeHtml(id)}" class="visually-hidden">Hydra build progress for ${escapeHtml(target.meta.label)}</h2>
+    <div class="table-head" aria-hidden="true">
+      <span>commit</span>
+      <span>build progress</span>
+    </div>
+    <div class="rows">
+      ${renderRows(target)}
+    </div>
+  </section>
+</section>`;
+    })
+    .join("");
+}
+
+function renderSwitchCss(targets: Record<string, TargetData>): string {
+  const rules: string[] = [];
+  for (const id of Object.keys(targets)) {
+    rules.push(`#target-${id}:checked ~ #pane-${id} { display: block; }`);
+    rules.push(
+      `#target-${id}:checked ~ .targets label[for="target-${id}"], ` +
+        `#target-${id}:focus-visible ~ .targets label[for="target-${id}"] { ` +
+        `color: var(--paper); background: var(--ink); }`,
+    );
+  }
+  return `<style>\n${rules.join("\n")}\n</style>`;
+}
+
+function renderHelp(): string {
   const lockCommand = [
     "nix flake lock --override-input nixpkgs \\",
-    `  github:${target.meta.repository}/<commit hash>`,
+    "  github:NixOS/nixpkgs/<commit hash>",
   ].join("\n");
   return `<section class="help" id="help" aria-labelledby="help-title">
   <h2 id="help-title">How to read this page</h2>
   <p>
-    Each row is one <code>${escapeHtml(target.meta.label)}</code> channel commit and the Hydra
-    evaluation that builds it. The bar shows how much of the channel's package set
-    Hydra has compiled:
+    Each row is one channel commit and the Hydra evaluation that builds it. The bar
+    shows how much of the channel's package set Hydra has compiled:
   </p>
   <pre><code>succeeded / (succeeded + failed + queued)</code></pre>
   <p>
@@ -161,46 +200,37 @@ function renderHelp(target: TargetData): string {
   <p>Pin a fully built commit in <code>flake.lock</code> before upgrading:</p>
   <pre><code>${escapeHtml(lockCommand)}</code></pre>
   <p>
-    Inspect any evaluation directly at <code>hydra.nixos.org/eval/&lt;id&gt;</code>, or check
-    the live jobset on
-    <a href="https://hydra.nixos.org/jobset/${encodeURIComponent(target.meta.jobset)}" target="_blank" rel="noreferrer">Hydra</a>.
+    Inspect any evaluation directly at <code>hydra.nixos.org/eval/&lt;id&gt;</code>. The
+    switch above is a plain CSS radio toggle — no JavaScript anywhere on this page.
   </p>
 </section>`;
 }
 
-export function renderPage(
-  target: TargetData,
-  targets: Record<string, TargetData>,
-): string {
-  const label = escapeHtml(target.meta.label);
-  const description = `How far has the current ${label} commit been built on Hydra?`;
+export function renderPage(data: DataFile): string {
+  const targets = data.targets;
+  const ids = Object.keys(targets);
+  if (!ids.length) throw new Error("no targets to render");
+  const defaultLabel = escapeHtml(targets[ids[0]].meta.label);
+  const description = `How far has the current ${defaultLabel} commit been built on Hydra?`;
   return `<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content="${escapeHtml(description)}" />
-    <title>Is ${label} built on Hydra yet?</title>
+    <title>Is ${defaultLabel} built on Hydra yet?</title>
     <link rel="stylesheet" href="./style.css" />
+    ${renderSwitchCss(targets)}
   </head>
   <body>
     <main>
       <header class="hero">
-        <h1>Is<br /><code>${label}</code><br />built on Hydra yet?</h1>
+        <h1>Is it<br />built on Hydra<br />yet?</h1>
       </header>
-      ${renderNav(targets, target.meta.id)}
-      <p class="updated">Last updated: ${escapeHtml(formatUpdated(target.generatedAt))}</p>
-      <section class="results" aria-labelledby="results-title">
-        <h2 id="results-title" class="visually-hidden">Hydra build progress by channel commit</h2>
-        <div class="table-head" aria-hidden="true">
-          <span>commit</span>
-          <span>build progress</span>
-        </div>
-        <div class="rows">
-          ${renderRows(target)}
-        </div>
-      </section>
-      ${renderHelp(target)}
+      ${renderSwitchInputs(targets)}
+      ${renderNav(targets)}
+      ${renderPanes(targets)}
+      ${renderHelp()}
     </main>
   </body>
 </html>
@@ -208,13 +238,6 @@ export function renderPage(
 }
 
 export function renderSite(data: DataFile): RenderedPage[] {
-  const ids = Object.keys(data.targets);
-  if (!ids.length) throw new Error("no targets to render");
-  const pages: RenderedPage[] = [];
-  for (const id of ids) {
-    const target = data.targets[id];
-    const path = id === ids[0] ? "index.html" : `${id}.html`;
-    pages.push({ path, html: renderPage(target, data.targets) });
-  }
-  return pages;
+  if (!Object.keys(data.targets).length) throw new Error("no targets to render");
+  return [{ path: "index.html", html: renderPage(data) }];
 }

@@ -3,7 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "dev": "bun scripts/dev.ts",
     "scan": "bun src/scanner.ts",
+    "serve": "bun scripts/dev.ts",
     "test": "bun test tests/"
   }
 }

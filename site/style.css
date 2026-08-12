@@ -27,21 +27,34 @@ body {
   border-bottom: 2px solid var(--ink);
 }
 
-.targets a {
+.target-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.targets label {
+  display: inline-block;
   border: 0;
   border-left: 1px solid var(--line);
   padding: 8px 10px;
   font: inherit;
-  text-decoration: none;
-  background: transparent;
+  cursor: pointer;
+  user-select: none;
 }
 
-.targets a:hover,
-.targets a:focus-visible,
-.targets a.selected {
+.targets label:hover {
   color: var(--paper);
   background: var(--ink);
-  outline: none;
+}
+
+.target-pane {
+  display: none;
 }
 
 .help {
