@@ -108,7 +108,7 @@ function renderRow(row: EvalRow, target: TargetData): string {
   </summary>
   <div class="details">
     ${counts}
-    <p class="revision-line"><code>${escapeHtml(row.rev)}</code></p>
+    <p class="revision-line"><span class="revision-label">revision:</span> <code>${escapeHtml(row.rev)}</code></p>
     <div class="row-links">
       <a class="hydra-link" href="${evalUrl}" target="_blank" rel="noreferrer">Open Hydra evaluation ${row.eval} ↗</a>
       <a class="hydra-link" href="${commitUrl}" target="_blank" rel="noreferrer">GitHub commit ↗</a>
