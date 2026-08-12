@@ -2,7 +2,9 @@
 /** Query Hydra for the build progress of nixos-unstable / nixpkgs-unstable commits. */
 
 import { fileURLToPath } from "node:url";
-import { mkdirSync, renameSync, writeFileSync } from "node:fs";
+import { dirname, resolve } from "node:path";
+import { mkdirSync, readFileSync, renameSync, writeFileSync } from "node:fs";
+import { renderSite } from "./render.ts";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
 const SCHEMA_VERSION = 1;
@@ -192,15 +194,15 @@ export async function loadExisting(path: string): Promise<DataFile> {
 }
 
 export function atomicWrite(path: string, data: DataFile): void {
-  const directory = new URL(".", `file://${path}`).pathname;
+  const directory = dirname(resolve(path));
   mkdirSync(directory, { recursive: true });
-  const tempPath = `${directory}.data.${crypto.randomUUID()}.tmp`;
+  const tempPath = `${directory}/.state.${crypto.randomUUID()}.tmp`;
   writeFileSync(tempPath, JSON.stringify(data, null, 2) + "\n", "utf8");
   renameSync(tempPath, path);
 }
 
 export function loadConfig(path: string): any {
-  const config = JSON.parse(Bun.file(path).text());
+  const config = JSON.parse(readFileSync(path, "utf8"));
   if (!config || typeof config !== "object" || !Array.isArray(config.targets)) {
     throw new Error(`${path} is not a valid config: expected 'targets' list`);
   }
@@ -286,12 +288,16 @@ export async function run(configPath: string, dataPath: string): Promise<number>
   eprint(
     `wrote ${dataPath} (${succeeded} target(s) refreshed, ${Object.keys(targets).length} target(s) total)`,
   );
+  for (const page of renderSite(data)) {
+    writeFileSync(`${ROOT}site/${page.path}`, page.html, "utf8");
+    eprint(`wrote site/${page.path}`);
+  }
   return 0;
 }
 
 if (import.meta.main) {
   let configPath = `${ROOT}config.json`;
-  let dataPath = `${ROOT}site/data.json`;
+  let dataPath = `${ROOT}site/state.json`;
   const argv = Bun.argv.slice(2);
   for (let index = 0; index < argv.length; index++) {
     if (argv[index] === "--config") configPath = argv[++index];

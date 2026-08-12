@@ -29,14 +29,14 @@ jobs:
       - uses: oven-sh/setup-bun@v2
 
       - name: Scan Hydra build progress
-        run: bun src/scanner.ts --config config.json --data site/data.json
+        run: bun src/scanner.ts --config config.json --data site/state.json
 
       - name: Validate publish artifact
         run: >-
-          bun -e 'await Bun.file("site/data.json").json()' &&
           test -s site/index.html &&
-          test -s site/app.js &&
-          test -s site/style.css
+          test -s site/style.css &&
+          bun -e 'await Bun.file("site/state.json").json()' &&
+          ! grep -rl "<script" site/
 
       - name: Persist measurement history
         env:

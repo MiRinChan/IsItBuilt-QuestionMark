@@ -20,70 +20,53 @@ body {
   background: var(--paper);
 }
 
-.help-open {
-  position: fixed;
-  z-index: 10;
-  top: 18px;
-  right: 18px;
-  width: 44px;
-  height: 44px;
-  border: 2px solid var(--ink);
-  padding: 0;
-  font: 700 1.5rem/1 Arial, Helvetica, sans-serif;
-  background: var(--paper);
-  cursor: pointer;
+.targets {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 34px;
+  border-bottom: 2px solid var(--ink);
 }
 
-.help-open:hover,
-.help-open:focus-visible,
-.help-close:hover,
-.help-close:focus-visible {
+.targets a {
+  border: 0;
+  border-left: 1px solid var(--line);
+  padding: 8px 10px;
+  font: inherit;
+  text-decoration: none;
+  background: transparent;
+}
+
+.targets a:hover,
+.targets a:focus-visible,
+.targets a.selected {
   color: var(--paper);
   background: var(--ink);
   outline: none;
 }
 
-.help-dialog {
+.help {
   width: min(620px, calc(100% - 28px));
-  border: 2px solid var(--ink);
-  padding: 28px;
-  color: var(--ink);
-  background: var(--paper);
+  margin-top: 48px;
+  border-top: 2px solid var(--ink);
+  padding-top: 24px;
 }
 
-.help-dialog::backdrop {
-  background: rgb(0 0 0 / 45%);
-}
-
-.help-dialog h2 {
-  margin: 0 42px 18px 0;
+.help h2 {
+  margin: 0 0 18px 0;
   font-size: clamp(1.45rem, 4vw, 2.2rem);
   font-weight: 400;
 }
 
-.help-dialog p {
+.help p {
   line-height: 1.5;
 }
 
-.help-dialog pre {
+.help pre {
   overflow-x: auto;
   border: 1px solid var(--line);
   margin: 12px 0;
   padding: 12px;
   background: var(--panel);
-}
-
-.help-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 36px;
-  height: 36px;
-  border: 1px solid var(--ink);
-  padding: 0;
-  font: 400 1.6rem/1 Arial, Helvetica, sans-serif;
-  background: transparent;
-  cursor: pointer;
 }
 
 
@@ -210,17 +193,11 @@ main {
   font-family: "Courier New", Courier, monospace;
 }
 
-.copy-commit {
-  overflow: hidden;
-  border: 0;
-  padding: 0;
+.commit-hash {
   font: inherit;
   text-decoration: underline;
   text-decoration-thickness: 1px;
   text-underline-offset: 3px;
-  text-overflow: ellipsis;
-  background: transparent;
-  cursor: copy;
 }
 
 .commit-link {
@@ -377,17 +354,6 @@ main {
 
   .details {
     grid-template-columns: 1fr;
-  }
-
-  .help-open {
-    top: 10px;
-    right: 10px;
-    width: 38px;
-    height: 38px;
-  }
-
-  .help-dialog {
-    padding: 20px;
   }
 }
 

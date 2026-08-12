@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import path from "node:path";
 import {
   atomicWrite,
+  loadConfig,
   loadExisting,
   mergeRows,
   parseEvalsPage,
@@ -145,6 +146,14 @@ describe("storage", () => {
     Bun.spawnSync(["rm", "-f", path]);
   });
 
+  test("atomic write accepts relative paths", async () => {
+    const path = "site/.tmp-relative-state.json";
+    atomicWrite(path, { schemaVersion: 1, generatedAt: null, targets: {} });
+    const data = await loadExisting(path);
+    expect(data.schemaVersion).toBe(1);
+    Bun.spawnSync(["rm", "-f", path]);
+  });
+
   test("load existing missing file returns empty", async () => {
     const data = await loadExisting(`${FIXTURES}/missing.json`);
     expect(data).toEqual({ schemaVersion: 1, generatedAt: null, targets: {} });
@@ -154,6 +163,21 @@ describe("storage", () => {
     const path = `${FIXTURES}/.tmp-malformed.json`;
     await Bun.write(path, "[1, 2, 3]");
     expect(loadExisting(path)).rejects.toThrow();
+    Bun.spawnSync(["rm", "-f", path]);
+  });
+});
+
+describe("config", () => {
+  test("loads a valid config synchronously", () => {
+    const config = loadConfig("config.json");
+    expect(config.targets).toHaveLength(3);
+    expect(config.targets[1].jobset).toBe("nixos/unstable-small");
+  });
+
+  test("rejects a config without targets", async () => {
+    const path = `${FIXTURES}/.tmp-config.json`;
+    await Bun.write(path, JSON.stringify({ historyLimit: 30 }));
+    expect(() => loadConfig(path)).toThrow("expected 'targets' list");
     Bun.spawnSync(["rm", "-f", path]);
   });
 });

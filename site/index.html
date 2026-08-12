@@ -3,88 +3,450 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta
-      name="description"
-      content="How far has the current nixos-unstable / nixpkgs-unstable commit been built on Hydra?"
-    />
+    <meta name="description" content="How far has the current nixos-unstable commit been built on Hydra?" />
     <title>Is nixos-unstable built on Hydra yet?</title>
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <button
-      id="help-open"
-      class="help-open"
-      type="button"
-      aria-haspopup="dialog"
-      aria-controls="help-dialog"
-      aria-label="Help"
-    >
-      ?
-    </button>
     <main>
       <header class="hero">
-        <h1>
-          Is<br /><button
-            id="target-switch"
-            class="target-switch"
-            type="button"
-            aria-label="Switch channel"
-          >
-            <code id="target-label">nixos-unstable</code>
-          </button>
-          <br />built on Hydra yet?
-        </h1>
+        <h1>Is<br /><code>nixos-unstable</code><br />built on Hydra yet?</h1>
       </header>
-
-      <p id="feedback" class="feedback" aria-live="polite"></p>
-
+      <nav class="targets" aria-label="Channel"><a href="./index.html" class="selected" aria-current="page">nixos-unstable</a><a href="./nixos-unstable-small.html">nixos-unstable-small</a><a href="./nixpkgs-unstable.html">nixpkgs-unstable</a></nav>
+      <p class="updated">Last updated: 2026-08-12 15:12 UTC</p>
       <section class="results" aria-labelledby="results-title">
-        <h2 id="results-title" class="visually-hidden">
-          Hydra build progress by channel commit
-        </h2>
+        <h2 id="results-title" class="visually-hidden">Hydra build progress by channel commit</h2>
         <div class="table-head" aria-hidden="true">
           <span>commit</span>
           <span>build progress</span>
         </div>
-        <div id="rows" class="rows" aria-live="polite">
-          <p class="empty">Loading data…</p>
+        <div class="rows">
+          <details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 62.73904261109069%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">867dcbc30baf</code>
+      <span class="commit-date">2026-08-12</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/867dcbc30bafe3c862ef88620f2e7a109d7d3be5" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1828024" title="Open Hydra evaluation 1828024" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">95.4%</span>
+      <span class="metric-sub">4,453 queued · 2,647 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">147,837</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">2,647</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">4,453</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">—</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1828024</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>867dcbc30bafe3c862ef88620f2e7a109d7d3be5</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1828024" target="_blank" rel="noreferrer">Open Hydra evaluation 1828024 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">2fcb964de67f</code>
+      <span class="commit-date">2026-08-10</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/2fcb964de67fcf60b43471c55d5d99e61a9ccb5a" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827979" title="Open Hydra evaluation 1827979" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">97.9%</span>
+      <span class="metric-sub">fully built · 3,240 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">151,670</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">3,240</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+208</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827979</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>2fcb964de67fcf60b43471c55d5d99e61a9ccb5a</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827979" target="_blank" rel="noreferrer">Open Hydra evaluation 1827979 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">279b4a8275f0</code>
+      <span class="commit-date">2026-08-09</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/279b4a8275f032c566576b3f181fa0f27197f588" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827927" title="Open Hydra evaluation 1827927" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">98.0%</span>
+      <span class="metric-sub">fully built · 3,131 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">151,462</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">3,131</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+1263</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827927</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>279b4a8275f032c566576b3f181fa0f27197f588</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827927" target="_blank" rel="noreferrer">Open Hydra evaluation 1827927 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">f13ff45afd1b</code>
+      <span class="commit-date">2026-08-07</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/f13ff45afd1bb73e640eaa08a7066dbed07e3238" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827881" title="Open Hydra evaluation 1827881" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">97.2%</span>
+      <span class="metric-sub">fully built · 4,384 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">150,199</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">4,384</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+124</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827881</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>f13ff45afd1bb73e640eaa08a7066dbed07e3238</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827881" target="_blank" rel="noreferrer">Open Hydra evaluation 1827881 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">b7c2ada94fe9</code>
+      <span class="commit-date">2026-08-05</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/b7c2ada94fe99c15b0dbcf4d11fd7850b957a436" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827834" title="Open Hydra evaluation 1827834" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">97.1%</span>
+      <span class="metric-sub">fully built · 4,425 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">150,075</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">4,425</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+320</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827834</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>b7c2ada94fe99c15b0dbcf4d11fd7850b957a436</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827834" target="_blank" rel="noreferrer">Open Hydra evaluation 1827834 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">e72e4f299401</code>
+      <span class="commit-date">2026-08-04</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/e72e4f299401a3689d4b3d5fc6496b11db7064eb" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827780" title="Open Hydra evaluation 1827780" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">97.0%</span>
+      <span class="metric-sub">fully built · 4,671 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">149,755</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">4,671</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">-19</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827780</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>e72e4f299401a3689d4b3d5fc6496b11db7064eb</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827780" target="_blank" rel="noreferrer">Open Hydra evaluation 1827780 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">643809054d65</code>
+      <span class="commit-date">2026-08-02</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/643809054d65fdd466a63e3155b8c498cb483c04" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827727" title="Open Hydra evaluation 1827727" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">97.0%</span>
+      <span class="metric-sub">fully built · 4,609 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">149,774</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">4,609</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+141</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827727</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>643809054d65fdd466a63e3155b8c498cb483c04</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827727" target="_blank" rel="noreferrer">Open Hydra evaluation 1827727 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">148bab9c1c3c</code>
+      <span class="commit-date">2026-08-01</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/148bab9c1c3c53136ecb44a6ea356a0ed5b39b06" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827696" title="Open Hydra evaluation 1827696" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">97.0%</span>
+      <span class="metric-sub">fully built · 4,698 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">149,633</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">4,698</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+7898</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827696</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>148bab9c1c3c53136ecb44a6ea356a0ed5b39b06</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827696" target="_blank" rel="noreferrer">Open Hydra evaluation 1827696 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">789741fc4ca7</code>
+      <span class="commit-date">2026-08-01</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/789741fc4ca766061255b4f0c11073a056327db6" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827691" title="Open Hydra evaluation 1827691" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">91.8%</span>
+      <span class="metric-sub">fully built · 12,592 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">141,735</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">12,592</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">-7673</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827691</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>789741fc4ca766061255b4f0c11073a056327db6</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827691" target="_blank" rel="noreferrer">Open Hydra evaluation 1827691 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">1559d3daa3ec</code>
+      <span class="commit-date">2026-07-31</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/1559d3daa3ecc813a650b79375ea61b6741b8746" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827652" title="Open Hydra evaluation 1827652" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">96.8%</span>
+      <span class="metric-sub">fully built · 4,891 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">149,408</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">4,891</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+225</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827652</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>1559d3daa3ecc813a650b79375ea61b6741b8746</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827652" target="_blank" rel="noreferrer">Open Hydra evaluation 1827652 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">0954f7ee2f6b</code>
+      <span class="commit-date">2026-07-29</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/0954f7ee2f6bb3dc7d4e3d0d8bcb8fd4bde4cfc5" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827587" title="Open Hydra evaluation 1827587" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">96.6%</span>
+      <span class="metric-sub">fully built · 5,200 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">149,183</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">5,200</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+246</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827587</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>0954f7ee2f6bb3dc7d4e3d0d8bcb8fd4bde4cfc5</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827587" target="_blank" rel="noreferrer">Open Hydra evaluation 1827587 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">55dd9a2b5b25</code>
+      <span class="commit-date">2026-07-28</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/55dd9a2b5b2549693c0af87d588ff00500350995" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827560" title="Open Hydra evaluation 1827560" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">96.5%</span>
+      <span class="metric-sub">fully built · 5,454 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">148,937</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">5,454</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+64</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827560</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>55dd9a2b5b2549693c0af87d588ff00500350995</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827560" target="_blank" rel="noreferrer">Open Hydra evaluation 1827560 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">624af665418d</code>
+      <span class="commit-date">2026-07-26</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/624af665418d3c65d544145b4d34ad696439570e" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827505" title="Open Hydra evaluation 1827505" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">96.5%</span>
+      <span class="metric-sub">fully built · 5,388 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">148,873</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">5,388</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+1291</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827505</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>624af665418d3c65d544145b4d34ad696439570e</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827505" target="_blank" rel="noreferrer">Open Hydra evaluation 1827505 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">76ffe07b4094</code>
+      <span class="commit-date">2026-07-25</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/76ffe07b4094825c48ad06e494ec08a43cc7b8e0" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827464" title="Open Hydra evaluation 1827464" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">95.7%</span>
+      <span class="metric-sub">fully built · 6,654 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">147,582</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">6,654</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+449</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827464</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>76ffe07b4094825c48ad06e494ec08a43cc7b8e0</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827464" target="_blank" rel="noreferrer">Open Hydra evaluation 1827464 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">8909a37ad73d</code>
+      <span class="commit-date">2026-07-25</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/8909a37ad73d611f76bc1d17c17724e7b8dd02f1" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827457" title="Open Hydra evaluation 1827457" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">95.4%</span>
+      <span class="metric-sub">fully built · 7,097 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">147,133</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">7,097</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">-329</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827457</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>8909a37ad73d611f76bc1d17c17724e7b8dd02f1</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827457" target="_blank" rel="noreferrer">Open Hydra evaluation 1827457 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">e2587caef70c</code>
+      <span class="commit-date">2026-07-23</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/e2587caef70cea85dd97d7daab492899902dbf5d" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827412" title="Open Hydra evaluation 1827412" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">95.6%</span>
+      <span class="metric-sub">fully built · 6,731 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">147,462</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">6,731</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+680</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827412</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>e2587caef70cea85dd97d7daab492899902dbf5d</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827412" target="_blank" rel="noreferrer">Open Hydra evaluation 1827412 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">53706ae820c3</code>
+      <span class="commit-date">2026-07-22</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/53706ae820c39e267b6182a694f838491c80005b" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827378" title="Open Hydra evaluation 1827378" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">95.5%</span>
+      <span class="metric-sub">fully built · 6,928 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">146,782</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">6,928</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+318</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827378</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>53706ae820c39e267b6182a694f838491c80005b</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827378" target="_blank" rel="noreferrer">Open Hydra evaluation 1827378 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">09fe5f351396</code>
+      <span class="commit-date">2026-07-20</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/09fe5f351396dd7db5024907681b203ada99e800" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827328" title="Open Hydra evaluation 1827328" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">95.3%</span>
+      <span class="metric-sub">fully built · 7,193 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">146,464</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">7,193</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">-2618</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827328</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>09fe5f351396dd7db5024907681b203ada99e800</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827328" target="_blank" rel="noreferrer">Open Hydra evaluation 1827328 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">241313f4e8e5</code>
+      <span class="commit-date">2026-07-19</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/241313f4e8e508cb9b13278c2b0fa25b9ca27163" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827304" title="Open Hydra evaluation 1827304" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">97.0%</span>
+      <span class="metric-sub">fully built · 4,616 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">149,082</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">4,616</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+14</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827304</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>241313f4e8e508cb9b13278c2b0fa25b9ca27163</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827304" target="_blank" rel="noreferrer">Open Hydra evaluation 1827304 ↗</a>
+  </div>
+</details><details class="result">
+  <summary class="result-summary">
+    <span class="row-bar high" style="width: 100%"></span>
+    <span class="cell commit-cell">
+      <code class="commit-hash">61b7c44c4073</code>
+      <span class="commit-date">2026-07-18</span>
+      <a class="commit-link" href="https://github.com/NixOS/nixpkgs/commit/61b7c44c4073f0b827768aff0049561b5110ea5a" title="Open commit on GitHub" target="_blank" rel="noreferrer">↗</a>
+      <a class="commit-link" href="https://hydra.nixos.org/eval/1827264" title="Open Hydra evaluation 1827264" target="_blank" rel="noreferrer">⚙</a>
+    </span>
+    <span class="cell rate-cell">
+      <span class="metric-text">97.0%</span>
+      <span class="metric-sub">fully built · 4,569 failed</span>
+    </span>
+  </summary>
+  <div class="details">
+    <section class="count-detail"><p class="count-name">succeeded</p><p class="count-value">149,068</p></section><section class="count-detail"><p class="count-name">failed</p><p class="count-value">4,569</p></section><section class="count-detail"><p class="count-name">queued</p><p class="count-value">0</p></section><section class="count-detail"><p class="count-name">new vs previous</p><p class="count-value">+1623</p></section><section class="count-detail"><p class="count-name">evaluation</p><p class="count-value">1827264</p></section>
+    <section class="count-detail"><p class="count-name">revision</p><p class="count-value"><code>61b7c44c4073f0b827768aff0049561b5110ea5a</code></p></section>
+    <p class="quality-note">Hydra reports: Eval Errors.</p>
+    <a class="hydra-link" href="https://hydra.nixos.org/eval/1827264" target="_blank" rel="noreferrer">Open Hydra evaluation 1827264 ↗</a>
+  </div>
+</details>
         </div>
       </section>
-      <p id="updated" class="updated">Last updated: loading…</p>
+      <section class="help" id="help" aria-labelledby="help-title">
+  <h2 id="help-title">How to read this page</h2>
+  <p>
+    Each row is one <code>nixos-unstable</code> channel commit and the Hydra
+    evaluation that builds it. The bar shows how much of the channel's package set
+    Hydra has compiled:
+  </p>
+  <pre><code>succeeded / (succeeded + failed + queued)</code></pre>
+  <p>
+    When <strong>queued</strong> is zero, everything has been built and upgrading to that
+    commit downloads binaries from <code>cache.nixos.org</code> — nothing is compiled
+    locally. While <strong>queued</strong> is non-zero, upgrading would make your machine
+    compile the packages Hydra has not finished yet.
+  </p>
+  <p>Pin a fully built commit in <code>flake.lock</code> before upgrading:</p>
+  <pre><code>nix flake lock --override-input nixpkgs \
+  github:NixOS/nixpkgs/&lt;commit hash&gt;</code></pre>
+  <p>
+    Inspect any evaluation directly at <code>hydra.nixos.org/eval/&lt;id&gt;</code>, or check
+    the live jobset on
+    <a href="https://hydra.nixos.org/jobset/nixos%2Funstable" target="_blank" rel="noreferrer">Hydra</a>.
+  </p>
+</section>
     </main>
-
-    <dialog id="help-dialog" class="help-dialog" aria-labelledby="help-title">
-      <form method="dialog">
-        <button class="help-close" type="submit" aria-label="Close help">
-          ×
-        </button>
-      </form>
-      <h2 id="help-title">
-        Is <code id="help-target">nixos-unstable</code> built on Hydra yet?
-      </h2>
-      <p>
-        Each row is one channel commit and the Hydra evaluation that builds it.
-        The bar shows how much of the channel's package set Hydra has compiled:
-      </p>
-      <pre><code>succeeded / (succeeded + failed + queued)</code></pre>
-      <p>
-        When <strong>queued</strong> is zero, everything has been built and
-        upgrading to that commit downloads binaries from
-        <code>cache.nixos.org</code> — nothing is compiled locally. While
-        <strong>queued</strong> is non-zero, upgrading would make your machine
-        compile the packages Hydra has not finished yet.
-      </p>
-      <p>
-        Pin a fully built commit in <code>flake.lock</code> before upgrading:
-      </p>
-      <pre><code id="lock-command">nix flake lock --override-input nixpkgs \
-  github:NixOS/nixpkgs/&lt;your commit&gt;</code></pre>
-      <p>
-        Inspect any evaluation directly at
-        <code>hydra.nixos.org/eval/&lt;id&gt;</code>, or check the live jobset
-        on <a id="jobset-link" href="https://hydra.nixos.org/jobset/nixos/unstable" target="_blank" rel="noreferrer">Hydra</a>.
-      </p>
-    </dialog>
-    <script type="module" src="./app.js"></script>
   </body>
 </html>
