@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-12T18:04:45Z",
+  "generatedAt": "2026-08-12T18:12:44Z",
   "targets": {
     "nixos-unstable": {
       "meta": {
@@ -11,16 +11,16 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixos-unstable"
       },
-      "generatedAt": "2026-08-12T18:04:41Z",
-      "lastAttemptAt": "2026-08-12T18:04:41Z",
+      "generatedAt": "2026-08-12T18:12:41Z",
+      "lastAttemptAt": "2026-08-12T18:12:41Z",
       "rows": [
         {
           "eval": 1828024,
           "rev": "867dcbc30bafe3c862ef88620f2e7a109d7d3be5",
           "timestamp": "2026-08-12T06:44:42Z",
-          "succeeded": 149685,
-          "failed": 3349,
-          "queued": 1903,
+          "succeeded": 149692,
+          "failed": 3374,
+          "queued": 1871,
           "delta": null,
           "status": "Eval Errors"
         },
@@ -225,16 +225,16 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixpkgs-unstable"
       },
-      "generatedAt": "2026-08-12T18:04:45Z",
-      "lastAttemptAt": "2026-08-12T18:04:45Z",
+      "generatedAt": "2026-08-12T18:12:44Z",
+      "lastAttemptAt": "2026-08-12T18:12:44Z",
       "rows": [
         {
           "eval": 1828030,
           "rev": "044bfe75bfe4c7bbe043dc17b5e42ea823b84a09",
           "timestamp": "2026-08-12T11:42:15Z",
-          "succeeded": 206943,
-          "failed": 5155,
-          "queued": 296,
+          "succeeded": 206950,
+          "failed": 5180,
+          "queued": 264,
           "delta": null,
           "status": "Eval Errors"
         },
@@ -242,10 +242,10 @@
           "eval": 1828025,
           "rev": "79b9861f1ad24e7f299b89f94fc29aee63f6023e",
           "timestamp": "2026-08-12T07:34:17Z",
-          "succeeded": 207011,
-          "failed": 5199,
-          "queued": 141,
-          "delta": "+3743",
+          "succeeded": 207018,
+          "failed": 5224,
+          "queued": 109,
+          "delta": "+3750",
           "status": "Eval Errors"
         },
         {
