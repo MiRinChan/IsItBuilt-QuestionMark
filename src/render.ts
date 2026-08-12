@@ -185,22 +185,11 @@ function renderHelpDialog(): string {
   return `<label for="help-toggle" class="help-backdrop" aria-hidden="true"></label>
 <dialog class="help-dialog" aria-labelledby="help-title">
   <label for="help-toggle" class="help-close" aria-label="Close help">×</label>
-  <h2 id="help-title">How to read this page</h2>
-  <p>
-    Each row is one channel commit and the Hydra evaluation that builds it. The bar
-    shows how much of the channel's package set Hydra has compiled:
-  </p>
-  <pre><code>succeeded / (succeeded + failed + queued)</code></pre>
-  <p>
-    When <strong>queued</strong> is zero, everything has been built and upgrading to that
-    commit downloads binaries from <code>cache.nixos.org</code> — nothing is compiled
-    locally. While <strong>queued</strong> is non-zero, upgrading would make your machine
-    compile the packages Hydra has not finished yet.
-  </p>
-  <p>Pin a fully built commit in <code>flake.lock</code> before upgrading:</p>
+  <h2 id="help-title">Tips</h2>
+  <p>Pin commit by:</p>
   <pre><code style="user-select: all;" >${escapeHtml(lockCommand)}</code></pre>
   <p>
-    Inspect any evaluation directly at <code>hydra.nixos.org/eval/&lt;id&gt;</code>. This page is JavaScript-Free. If you are a libre software dissidents, you can feel free to browse it.
+    By the way, this page is JavaScript-Free. If you are a libre software dissidents, you can feel free to browse it.
   </p>
 </dialog>`;
 }
