@@ -29,12 +29,18 @@ export function isFinished(row: EvalRow): boolean {
   return row.queued === 0;
 }
 
+export function firstFullRow(rows: EvalRow[]): EvalRow | undefined {
+  return rows.find((row) => isFinished(row));
+}
+
 export function barWidth(value: number | null): number {
   if (!Number.isFinite(value)) return 0;
   const clamped = Math.max(0, Math.min(100, value));
   if (clamped >= 100) return 100;
   return 100 * (1 - Math.log10(101 - clamped) / Math.log10(101));
 }
+
+export const DISPLAY_ROW_LIMIT = 5;
 
 export function barClass(row: EvalRow): string {
   if (isFinished(row) && row.failed === 0) return "ready";
@@ -73,7 +79,7 @@ function formatCount(value: number): string {
   return value.toLocaleString("en-US");
 }
 
-function renderRow(row: EvalRow, target: TargetData): string {
+function renderRow(row: EvalRow, target: TargetData, open: boolean): string {
   const progress = rowProgress(row);
   const width = isFinished(row) ? 100 : barWidth(progress);
   const percent = progress === null ? "no builds" : formatPercent(progress);
@@ -94,7 +100,7 @@ function renderRow(row: EvalRow, target: TargetData): string {
     )
     .join("");
 
-  return `<details class="result">
+  return `<details class="result"${open ? " open" : ""}>
   <summary class="result-summary">
     <span class="row-bar ${barClass(row)}" style="width: ${width}%"></span>
     <span class="cell commit-cell">
@@ -121,7 +127,9 @@ function renderRows(target: TargetData): string {
   if (!target.rows.length) {
     return `<p class="empty">No measurements yet. The scheduled scanner will populate this page.</p>`;
   }
-  return target.rows.map((row) => renderRow(row, target)).join("");
+  const rows = target.rows.slice(0, DISPLAY_ROW_LIMIT);
+  const firstFull = firstFullRow(rows);
+  return rows.map((row) => renderRow(row, target, row === firstFull)).join("");
 }
 
 function renderHero(targets: Record<string, TargetData>): string {
@@ -225,5 +233,12 @@ export function renderPage(data: DataFile): string {
 
 export function renderSite(data: DataFile): RenderedPage[] {
   if (!Object.keys(data.targets).length) throw new Error("no targets to render");
-  return [{ path: "index.html", html: renderPage(data) }];
+  const firstTarget = data.targets[Object.keys(data.targets)[0]];
+  const full = firstFullRow(firstTarget.rows);
+  const hash = full ? `${full.rev}\n` : "";
+  return [
+    { path: "index.html", html: renderPage(data) },
+    { path: "l", html: hash },
+    { path: "lastfull", html: hash },
+  ];
 }

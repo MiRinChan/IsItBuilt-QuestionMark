@@ -2,7 +2,9 @@ import { describe, expect, test } from "bun:test";
 import {
   barClass,
   barWidth,
+  DISPLAY_ROW_LIMIT,
   escapeHtml,
+  firstFullRow,
   formatDate,
   formatPercent,
   formatUpdated,
@@ -65,6 +67,12 @@ describe("metrics", () => {
     expect(isFinished(row({ queued: 5 }))).toBe(false);
   });
 
+  test("first full row is the newest row with zero queued", () => {
+    expect(firstFullRow([])).toBeUndefined();
+    const rows = [row({ queued: 5 }), row({ queued: 0 }), row({ queued: 0 })];
+    expect(firstFullRow(rows)).toBe(rows[1]);
+  });
+
   test("bar width uses a log scale that spreads out high progress", () => {
     expect(barWidth(100)).toBe(100);
     expect(barWidth(0)).toBe(0);
@@ -109,11 +117,72 @@ describe("formatting", () => {
 });
 
 describe("page rendering", () => {
-  test("renders a single page containing every target", () => {
+  test("renders the page plus l and lastfull endpoints", () => {
     const pages = renderSite(data);
-    expect(pages).toHaveLength(1);
-    expect(pages[0].path).toBe("index.html");
+    expect(pages.map((page) => page.path)).toEqual(["index.html", "l", "lastfull"]);
     expect(pages[0].html).not.toMatch(/<script/i);
+  });
+
+  test("l and lastfull contain the first fully built commit of the first target", () => {
+    const full: DataFile = {
+      ...data,
+      targets: {
+        "nixos-unstable": target("nixos-unstable", [
+          row({ eval: 1828061, rev: "0e251e24a4f24e036a084b6b4b2d2491af4167f4", queued: 49 }),
+          row({ queued: 0 }),
+        ]),
+        "nixpkgs-unstable": target("nixpkgs-unstable", [
+          row({ eval: 1828024, rev: "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", queued: 0 }),
+        ]),
+      },
+    };
+    const pages = renderSite(full);
+    expect(pages[1].html).toBe("867dcbc30bafe3c862ef88620f2e7a109d7d3be5\n");
+    expect(pages[2].html).toBe(pages[1].html);
+  });
+
+  test("l and lastfull are empty when nothing is fully built", () => {
+    const pages = renderSite(data);
+    expect(pages[1].html).toBe("");
+    expect(pages[2].html).toBe("");
+  });
+
+  test("only the first five rows are rendered per target", () => {
+    const many = Array.from({ length: DISPLAY_ROW_LIMIT + 3 }, (_, i) =>
+      row({ eval: 1828024 - i, rev: `867dcbc30bafe3c862ef88620f2e7a109d7d3be${i}` }),
+    );
+    const html = renderPage({
+      ...data,
+      targets: { "nixos-unstable": target("nixos-unstable", many) },
+    });
+    const details = html.match(/<details class="result"/g) ?? [];
+    expect(details).toHaveLength(DISPLAY_ROW_LIMIT);
+    expect(html).not.toContain("867dcbc30bafe3c862ef88620f2e7a109d7d3be7");
+  });
+
+  test("the first fully built row is expanded by default", () => {
+    const rows = [
+      row({ eval: 1828061, rev: "0e251e24a4f24e036a084b6b4b2d2491af4167f4", queued: 49 }),
+      row({ queued: 0 }),
+      row({ eval: 1827979, rev: "2fcb964de67fcf60b43471c55d5d99e61a9ccb5a", queued: 0 }),
+    ];
+    const html = renderPage({
+      ...data,
+      targets: { "nixos-unstable": target("nixos-unstable", rows) },
+    });
+    expect(html.match(/<details class="result" open/g)).toHaveLength(1);
+    expect(html).toContain(
+      `<details class="result" open>` +
+        `\n  <summary class="result-summary">\n` +
+        `    <span class="row-bar high" style="width: 100%"></span>`,
+    );
+    expect(html).toContain("0e251e24a4f24e036a084b6b4b2d2491af4167f4");
+    expect(html).toContain("2fcb964de67fcf60b43471c55d5d99e61a9ccb5a");
+  });
+
+  test("no row is expanded when nothing is fully built", () => {
+    const html = renderPage(data);
+    expect(html).not.toContain("<details class=\"result\" open");
   });
 
   test("title is a checkbox toggle between the two targets", () => {
