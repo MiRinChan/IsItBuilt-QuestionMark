@@ -190,12 +190,18 @@ function renderHelpDialog(): string {
     "nix flake lock --override-input nixpkgs \\",
     "  github:NixOS/nixpkgs/<commit hash>",
   ].join("\n");
+  const lockCommandFull = [
+    "nix flake lock --override-input nixpkgs \\",
+    "  github:NixOS/nixpkgs/$(curl -s https://yet.nixoscn.org/l)",
+  ].join("\n");
   return `<label for="help-toggle" class="help-backdrop" aria-hidden="true"></label>
 <dialog class="help-dialog" aria-labelledby="help-title">
   <label for="help-toggle" class="help-close" aria-label="Close help">×</label>
   <h2 id="help-title">Tips</h2>
   <p>Pin commit by:</p>
   <pre><code style="user-select: all;" >${escapeHtml(lockCommand)}</code></pre>
+  <p>Or pin the latest fully built commit automatically:</p>
+  <pre><code style="user-select: all;" >${escapeHtml(lockCommandFull)}</code></pre>
   <p>
     By the way, this page is JavaScript-Free. If you are a libre software dissidents, you can feel free to browse it.
   </p>

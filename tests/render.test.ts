@@ -220,6 +220,8 @@ describe("page rendering", () => {
     expect(html).toContain('id="help-toggle"');
     expect(html).toContain("<dialog class=\"help-dialog\"");
     expect(html).toContain("nix flake lock --override-input nixpkgs \\");
+    expect(html).toContain("github:NixOS/nixpkgs/$(curl -s https://yet.nixoscn.org/l)");
+    expect(html).toContain("Or pin the latest fully built commit automatically:");
     expect(html).toContain("JavaScript-Free");
     expect(html).toContain("label for=\"help-toggle\" class=\"help-backdrop\"");
     expect(html).toContain("label for=\"help-toggle\" class=\"help-open\"");

@@ -3,21 +3,11 @@
   --ink: #000;
   --paper: #fff;
   --dot-color: #000;
-  --dot: radial-gradient(circle, var(--dot-color) .5px, transparent .8px);
+  --dot: radial-gradient(circle, var(--dot-color) 0.5px, transparent 0.8px);
   --dot-sparse: 11px;
   --dot-light: 8px;
   --dot-mid: 11px;
   --dot-dense: 11.5px;
-  --stripe: repeating-linear-gradient(
-    -45deg,
-    var(--dot-color) 0 1px,
-    transparent 1px 30px
-  );
-  --stripe-dense: repeating-linear-gradient(
-    -45deg,
-    var(--dot-color) 0 1px,
-    transparent 1px 18px
-  );
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -68,7 +58,10 @@ body {
   align-items: center;
   justify-content: center;
   border: 2px solid var(--ink);
-  font: 700 1.5rem/1 Arial, Helvetica, sans-serif;
+  font:
+    700 1.5rem/1 Arial,
+    Helvetica,
+    sans-serif;
   background: var(--paper);
   cursor: pointer;
   user-select: none;
@@ -145,7 +138,10 @@ dialog.help-dialog {
   align-items: center;
   justify-content: center;
   border: 2px solid var(--ink);
-  font: 400 1.6rem/1 Arial, Helvetica, sans-serif;
+  font:
+    400 1.6rem/1 Arial,
+    Helvetica,
+    sans-serif;
   background: var(--paper);
   cursor: pointer;
   user-select: none;
@@ -155,7 +151,6 @@ dialog.help-dialog {
   color: var(--paper);
   background: var(--ink);
 }
-
 
 main {
   inline-size: min(1120px, calc(100% - 32px));
@@ -295,19 +290,12 @@ main {
   font-variant-numeric: tabular-nums;
 }
 
-.row-bar {
+.row-bar,
+.row-bar.high,
+.row-bar.ready {
   position: absolute;
   z-index: 0;
   inset: 0 auto 0 0;
-  background-image: var(--stripe);
-}
-
-.row-bar.high {
-  background-image: var(--stripe-dense);
-}
-
-.row-bar.ready {
-  background-image: none;
   background-color: var(--ink);
 }
 
