@@ -3,11 +3,21 @@
   --ink: #000;
   --paper: #fff;
   --dot-color: #000;
-  --dot: radial-gradient(circle, var(--dot-color) .5px, transparent 1px);
+  --dot: radial-gradient(circle, var(--dot-color) .5px, transparent .8px);
   --dot-sparse: 11px;
   --dot-light: 8px;
-  --dot-mid: 2px;
+  --dot-mid: 11px;
   --dot-dense: 11.5px;
+  --stripe: repeating-linear-gradient(
+    -45deg,
+    var(--dot-color) 0 1px,
+    transparent 1px 30px
+  );
+  --stripe-dense: repeating-linear-gradient(
+    -45deg,
+    var(--dot-color) 0 1px,
+    transparent 1px 18px
+  );
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -289,12 +299,11 @@ main {
   position: absolute;
   z-index: 0;
   inset: 0 auto 0 0;
-  background-image: var(--dot);
-  background-size: var(--dot-sparse) var(--dot-sparse);
+  background-image: var(--stripe);
 }
 
 .row-bar.high {
-  background-size: var(--dot-dense) var(--dot-dense);
+  background-image: var(--stripe-dense);
 }
 
 .row-bar.ready {
@@ -417,6 +426,7 @@ main {
     --ink: #ececec;
     --paper: #0f0f0f;
     --dot-color: #ececec;
+    --dot-mid: 24px;
   }
 
   .help-backdrop {
