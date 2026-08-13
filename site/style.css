@@ -177,6 +177,8 @@ main {
   background: transparent;
   cursor: pointer;
   text-align: start;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
 }
 
 .target-switch:hover,
@@ -433,6 +435,10 @@ main {
 
   .hero {
     padding-inline-end: 44px;
+  }
+
+  .target-switch {
+    line-height: 1.3;
   }
 
   .table-head,
