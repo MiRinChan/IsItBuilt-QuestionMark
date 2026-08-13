@@ -40,7 +40,7 @@ export function barWidth(value: number | null): number {
   return 100 * (1 - Math.log10(101 - clamped) / Math.log10(101));
 }
 
-export const DISPLAY_ROW_LIMIT = 5;
+export const DISPLAY_ROW_LIMIT = 10;
 
 export function barClass(row: EvalRow): string {
   if (isFinished(row) && row.failed === 0) return "ready";

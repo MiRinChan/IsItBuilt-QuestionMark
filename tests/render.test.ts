@@ -147,7 +147,7 @@ describe("page rendering", () => {
     expect(pages[2].html).toBe("");
   });
 
-  test("only the first five rows are rendered per target", () => {
+  test("only the first ten rows are rendered per target", () => {
     const many = Array.from({ length: DISPLAY_ROW_LIMIT + 3 }, (_, i) =>
       row({ eval: 1828024 - i, rev: `867dcbc30bafe3c862ef88620f2e7a109d7d3be${i}` }),
     );
@@ -157,7 +157,7 @@ describe("page rendering", () => {
     });
     const details = html.match(/<details class="result"/g) ?? [];
     expect(details).toHaveLength(DISPLAY_ROW_LIMIT);
-    expect(html).not.toContain("867dcbc30bafe3c862ef88620f2e7a109d7d3be7");
+    expect(html).not.toContain("867dcbc30bafe3c862ef88620f2e7a109d7d3be10");
   });
 
   test("the first fully built row is expanded by default", () => {
