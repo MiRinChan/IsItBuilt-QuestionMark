@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-08-13T17:43:20Z",
+  "generatedAt": "2026-08-14T05:06:44Z",
   "targets": {
     "nixos-unstable": {
       "meta": {
@@ -11,8 +11,8 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixos-unstable"
       },
-      "generatedAt": "2026-08-13T17:43:14Z",
-      "lastAttemptAt": "2026-08-13T17:43:14Z",
+      "generatedAt": "2026-08-14T05:06:38Z",
+      "lastAttemptAt": "2026-08-14T05:06:38Z",
       "rows": [
         {
           "eval": 1828061,
@@ -235,16 +235,26 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixpkgs-unstable"
       },
-      "generatedAt": "2026-08-13T17:43:20Z",
-      "lastAttemptAt": "2026-08-13T17:43:20Z",
+      "generatedAt": "2026-08-14T05:06:44Z",
+      "lastAttemptAt": "2026-08-14T05:06:44Z",
       "rows": [
+        {
+          "eval": 1828082,
+          "rev": "dfd83228ea899131ece39436f21b322f2a9cd436",
+          "timestamp": "2026-08-13T20:57:56Z",
+          "succeeded": 205581,
+          "failed": 5056,
+          "queued": 1968,
+          "delta": null,
+          "status": "Eval Errors"
+        },
         {
           "eval": 1828071,
           "rev": "85f3f6fdd59a29c80f9ab3b27c59eb96060293f7",
           "timestamp": "2026-08-13T12:24:48Z",
-          "succeeded": 206747,
+          "succeeded": 206758,
           "failed": 5281,
-          "queued": 515,
+          "queued": 504,
           "delta": null,
           "status": "Eval Errors"
         },
@@ -252,9 +262,9 @@
           "eval": 1828060,
           "rev": "6b5e5b7a6631f065bf6908986990b37d845f847f",
           "timestamp": "2026-08-13T04:10:51Z",
-          "succeeded": 207130,
+          "succeeded": 207141,
           "failed": 5362,
-          "queued": 28,
+          "queued": 17,
           "delta": null,
           "status": "Eval Errors"
         },
