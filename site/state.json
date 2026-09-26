@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-09-25T08:53:33Z",
+  "generatedAt": "2026-09-26T08:39:57Z",
   "targets": {
     "nixos-unstable": {
       "meta": {
@@ -11,9 +11,19 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixos-unstable"
       },
-      "generatedAt": "2026-09-25T08:53:30Z",
-      "lastAttemptAt": "2026-09-25T08:53:30Z",
+      "generatedAt": "2026-09-26T08:39:55Z",
+      "lastAttemptAt": "2026-09-26T08:39:55Z",
       "rows": [
+        {
+          "eval": 1829471,
+          "rev": "e94cb152ed51bd6e24eb4a41f1460252beb52cd2",
+          "timestamp": "2026-09-25T08:57:38Z",
+          "succeeded": 155466,
+          "failed": 2870,
+          "queued": 0,
+          "delta": "+66",
+          "status": "Eval Errors"
+        },
         {
           "eval": 1829432,
           "rev": "4975466d324710c576dc11ad614684e6bd8cad8e",
@@ -303,16 +313,6 @@
           "queued": 0,
           "delta": "+841",
           "status": "Eval Errors"
-        },
-        {
-          "eval": 1828061,
-          "rev": "0e251e24a4f24e036a084b6b4b2d2491af4167f4",
-          "timestamp": "2026-08-13T06:00:36Z",
-          "succeeded": 151521,
-          "failed": 3538,
-          "queued": 0,
-          "delta": "+108",
-          "status": "Eval Errors"
         }
       ]
     },
@@ -325,17 +325,47 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixpkgs-unstable"
       },
-      "generatedAt": "2026-09-25T08:53:33Z",
-      "lastAttemptAt": "2026-09-25T08:53:33Z",
+      "generatedAt": "2026-09-26T08:39:57Z",
+      "lastAttemptAt": "2026-09-26T08:39:57Z",
       "rows": [
+        {
+          "eval": 1829512,
+          "rev": "d54020a6ac3211e9f4201631bdf67678818c0cdf",
+          "timestamp": "2026-09-26T03:01:25Z",
+          "succeeded": 212817,
+          "failed": 4239,
+          "queued": 0,
+          "delta": "+18",
+          "status": "Eval Errors"
+        },
+        {
+          "eval": 1829499,
+          "rev": "79b6d20e55596f80baa35cda2a334da8a1fbf1ea",
+          "timestamp": "2026-09-25T18:48:52Z",
+          "succeeded": 212799,
+          "failed": 4244,
+          "queued": 0,
+          "delta": "+33",
+          "status": "Eval Errors"
+        },
+        {
+          "eval": 1829476,
+          "rev": "8c33f34c45c64d7311e8e9b8e56cb2cdd0d622e7",
+          "timestamp": "2026-09-25T10:36:46Z",
+          "succeeded": 212766,
+          "failed": 4240,
+          "queued": 0,
+          "delta": "+51",
+          "status": "Eval Errors"
+        },
         {
           "eval": 1829464,
           "rev": "7d5589bbf421c7b6f4185371abe3c465b1b557e9",
           "timestamp": "2026-09-25T02:24:35Z",
-          "succeeded": 212454,
-          "failed": 4252,
-          "queued": 274,
-          "delta": null,
+          "succeeded": 212715,
+          "failed": 4265,
+          "queued": 0,
+          "delta": "+71",
           "status": "Eval Errors"
         },
         {
@@ -596,36 +626,6 @@
           "failed": 4953,
           "queued": 0,
           "delta": "+136",
-          "status": "Eval Errors"
-        },
-        {
-          "eval": 1829174,
-          "rev": "c320b9607c14419236aa9151a3d3a73e23bbd090",
-          "timestamp": "2026-09-15T09:17:27Z",
-          "succeeded": 211838,
-          "failed": 5053,
-          "queued": 0,
-          "delta": "-198",
-          "status": "Eval Errors"
-        },
-        {
-          "eval": 1829166,
-          "rev": "a80a7e9cb9ea0472a915a3e9e4d35d26bae764c7",
-          "timestamp": "2026-09-15T00:57:01Z",
-          "succeeded": 212036,
-          "failed": 4864,
-          "queued": 0,
-          "delta": "-158",
-          "status": "Eval Errors"
-        },
-        {
-          "eval": 1829154,
-          "rev": "444386f4e19c3d9b24962632a94179225a3cbd36",
-          "timestamp": "2026-09-14T16:33:02Z",
-          "succeeded": 212194,
-          "failed": 4700,
-          "queued": 0,
-          "delta": "+479",
           "status": "Eval Errors"
         }
       ]
