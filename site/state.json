@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-01T10:33:35Z",
+  "generatedAt": "2026-11-02T11:18:35Z",
   "targets": {
     "nixos-unstable": {
       "meta": {
@@ -11,9 +11,19 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixos-unstable"
       },
-      "generatedAt": "2026-11-01T10:33:32Z",
-      "lastAttemptAt": "2026-11-01T10:33:32Z",
+      "generatedAt": "2026-11-02T11:18:32Z",
+      "lastAttemptAt": "2026-11-02T11:18:32Z",
       "rows": [
+        {
+          "eval": 1830926,
+          "rev": "0bb2eedc20e4739f29e8045034f2828ad7054f8f",
+          "timestamp": "2026-11-01T14:23:41Z",
+          "succeeded": 153610,
+          "failed": 3432,
+          "queued": 0,
+          "delta": "+105",
+          "status": "Eval Errors"
+        },
         {
           "eval": 1830848,
           "rev": "1c89083e451e891152365b799595cf7790a43325",
@@ -303,16 +313,6 @@
           "queued": 0,
           "delta": "+76",
           "status": "Eval Errors"
-        },
-        {
-          "eval": 1829252,
-          "rev": "e554fab72f81915600f3f449b786fd9af40439a5",
-          "timestamp": "2026-09-17T23:30:54Z",
-          "succeeded": 155111,
-          "failed": 3141,
-          "queued": 0,
-          "delta": "+189",
-          "status": "Eval Errors"
         }
       ]
     },
@@ -325,17 +325,47 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixpkgs-unstable"
       },
-      "generatedAt": "2026-11-01T10:33:35Z",
-      "lastAttemptAt": "2026-11-01T10:33:35Z",
+      "generatedAt": "2026-11-02T11:18:35Z",
+      "lastAttemptAt": "2026-11-02T11:18:35Z",
       "rows": [
+        {
+          "eval": 1830953,
+          "rev": "df1e6651c16c38563a164037647a5f00704b3e41",
+          "timestamp": "2026-11-02T11:01:45Z",
+          "succeeded": 209330,
+          "failed": 4710,
+          "queued": 1312,
+          "delta": null,
+          "status": "Eval Errors"
+        },
+        {
+          "eval": 1830940,
+          "rev": "5c9de89ec55bff981cb8da1a4ee92b10f1438ffc",
+          "timestamp": "2026-11-02T02:48:58Z",
+          "succeeded": 210459,
+          "failed": 4855,
+          "queued": 0,
+          "delta": "+29",
+          "status": "Eval Errors"
+        },
+        {
+          "eval": 1830931,
+          "rev": "b86618e9d840c37274777c13e49bf8e8ef7208b6",
+          "timestamp": "2026-11-01T18:15:22Z",
+          "succeeded": 210430,
+          "failed": 4841,
+          "queued": 0,
+          "delta": "+115",
+          "status": "Eval Errors"
+        },
         {
           "eval": 1830920,
           "rev": "cbf1930540d1e56f73db3af0a8e2b3412f4fed4e",
           "timestamp": "2026-11-01T10:02:55Z",
-          "succeeded": 210308,
+          "succeeded": 210315,
           "failed": 5130,
-          "queued": 7,
-          "delta": null,
+          "queued": 0,
+          "delta": "-115",
           "status": "Eval Errors"
         },
         {
@@ -596,36 +626,6 @@
           "failed": 5370,
           "queued": 0,
           "delta": "+123",
-          "status": "Eval Errors"
-        },
-        {
-          "eval": 1830588,
-          "rev": "3a32588c117116d2bf0edc33915981398fab2b00",
-          "timestamp": "2026-10-23T06:06:56Z",
-          "succeeded": 210426,
-          "failed": 5481,
-          "queued": 0,
-          "delta": "+1234",
-          "status": "Eval Errors"
-        },
-        {
-          "eval": 1830571,
-          "rev": "2e3b88f61cc996264b5036a5cde279603eb6420a",
-          "timestamp": "2026-10-22T22:11:47Z",
-          "succeeded": 209192,
-          "failed": 6682,
-          "queued": 0,
-          "delta": "+1225",
-          "status": "Eval Errors"
-        },
-        {
-          "eval": 1830557,
-          "rev": "7b995718d7e1f4d52aee88f576202de9c63fa703",
-          "timestamp": "2026-10-22T13:58:09Z",
-          "succeeded": 207967,
-          "failed": 7609,
-          "queued": 0,
-          "delta": "+722",
           "status": "Eval Errors"
         }
       ]
