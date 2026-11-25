@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "generatedAt": "2026-11-24T13:51:06Z",
+  "generatedAt": "2026-11-25T13:03:33Z",
   "targets": {
     "nixos-unstable": {
       "meta": {
@@ -11,16 +11,26 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixos-unstable"
       },
-      "generatedAt": "2026-11-24T13:51:01Z",
-      "lastAttemptAt": "2026-11-24T13:51:01Z",
+      "generatedAt": "2026-11-25T13:03:27Z",
+      "lastAttemptAt": "2026-11-25T13:03:27Z",
       "rows": [
+        {
+          "eval": 1831904,
+          "rev": "58d0d3e9d527ca7263be6a45d1f86eacdc700dab",
+          "timestamp": "2026-11-24T19:24:43Z",
+          "succeeded": 155661,
+          "failed": 3279,
+          "queued": 971,
+          "delta": "+1424",
+          "status": "Eval Errors"
+        },
         {
           "eval": 1831822,
           "rev": "512ea6cb72430011eebca436aacc87c5181d0726",
           "timestamp": "2026-11-23T17:17:11Z",
-          "succeeded": 150653,
-          "failed": 2576,
-          "queued": 6603,
+          "succeeded": 154237,
+          "failed": 4826,
+          "queued": 769,
           "delta": null,
           "status": "Eval Errors"
         },
@@ -303,16 +313,6 @@
           "queued": 0,
           "delta": "-701",
           "status": "Eval Errors"
-        },
-        {
-          "eval": 1830101,
-          "rev": "7fd4004d0511991fff3a0524856a9be09e28c5f0",
-          "timestamp": "2026-10-11T16:27:24Z",
-          "succeeded": 154610,
-          "failed": 3652,
-          "queued": 0,
-          "delta": "+69",
-          "status": "Eval Errors"
         }
       ]
     },
@@ -325,46 +325,66 @@
         "repositoryUrl": "https://github.com/NixOS/nixpkgs",
         "branch": "nixpkgs-unstable"
       },
-      "generatedAt": "2026-11-24T13:51:06Z",
-      "lastAttemptAt": "2026-11-24T13:51:06Z",
+      "generatedAt": "2026-11-25T13:03:33Z",
+      "lastAttemptAt": "2026-11-25T13:03:33Z",
       "rows": [
+        {
+          "eval": 1831927,
+          "rev": "4a8659832abc65bc4623cbddef21b4c06a8d6f0f",
+          "timestamp": "2026-11-25T06:40:19Z",
+          "succeeded": 211793,
+          "failed": 4362,
+          "queued": 3107,
+          "delta": null,
+          "status": "Eval Errors"
+        },
+        {
+          "eval": 1831912,
+          "rev": "146370cc436cb8fb1b8454af265d99118e423799",
+          "timestamp": "2026-11-24T22:30:21Z",
+          "succeeded": 211989,
+          "failed": 4474,
+          "queued": 2783,
+          "delta": null,
+          "status": "Eval Errors"
+        },
         {
           "eval": 1831882,
           "rev": "1c86e16bde77dbba351a539f4e71694db98f4ad8",
           "timestamp": "2026-11-24T13:10:56Z",
-          "succeeded": 208034,
-          "failed": 4391,
-          "queued": 6799,
-          "delta": null,
+          "succeeded": 214114,
+          "failed": 4667,
+          "queued": 443,
+          "delta": "+107",
           "status": "Eval Errors"
         },
         {
           "eval": 1831864,
           "rev": "ce9fc27f80cee11ec0c9a8e7723fe680bd5ec7f8",
           "timestamp": "2026-11-24T04:41:55Z",
-          "succeeded": 209252,
-          "failed": 4620,
-          "queued": 5343,
-          "delta": null,
+          "succeeded": 214007,
+          "failed": 4796,
+          "queued": 412,
+          "delta": "+1612",
           "status": "Eval Errors"
         },
         {
           "eval": 1831839,
           "rev": "e91954b20b6fff7145a3912def4d6405c6220a48",
           "timestamp": "2026-11-23T22:46:18Z",
-          "succeeded": 209647,
-          "failed": 6328,
-          "queued": 3159,
-          "delta": null,
+          "succeeded": 212395,
+          "failed": 6385,
+          "queued": 354,
+          "delta": "+498",
           "status": "Eval Errors"
         },
         {
           "eval": 1831813,
           "rev": "332be32d7d0c4a8958a51915e145e99171b16107",
           "timestamp": "2026-11-23T13:49:21Z",
-          "succeeded": 209984,
-          "failed": 6615,
-          "queued": 2536,
+          "succeeded": 211897,
+          "failed": 6918,
+          "queued": 320,
           "delta": null,
           "status": "Eval Errors"
         },
@@ -606,26 +626,6 @@
           "failed": 3465,
           "queued": 1,
           "delta": "+63",
-          "status": "Eval Errors"
-        },
-        {
-          "eval": 1831461,
-          "rev": "67572519338168f1d5f9b1d5ea2dc0e2dc6f1a5a",
-          "timestamp": "2026-11-15T10:04:57Z",
-          "succeeded": 212624,
-          "failed": 3496,
-          "queued": 1,
-          "delta": "+28",
-          "status": "Eval Errors"
-        },
-        {
-          "eval": 1831450,
-          "rev": "1c872b8c508bbbfebc1b0b74777ff391ce0a574c",
-          "timestamp": "2026-11-15T01:51:35Z",
-          "succeeded": 212596,
-          "failed": 3500,
-          "queued": 1,
-          "delta": "+127",
           "status": "Eval Errors"
         }
       ]
